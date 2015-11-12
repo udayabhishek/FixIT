@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Place Autocomplete</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+            <meta charset="utf-8">
+                <style>
+                    html, body {
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                    }
+                
+                #map {
+                    height: 100%;
+                }
+                
+                .controls {
+                    margin-top: 10px;
+                    border: 1px solid transparent;
+                    border-radius: 2px 0 0 2px;
+                    box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    height: 32px;
+                    outline: none;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                }
+                
+                #pac-input {
+                    background-color: #fff;
+                    font-family: Roboto;
+                    font-size: 15px;
+                    font-weight: 300;
+                    margin-left: 12px;
+                    padding: 0 11px 0 13px;
+                    text-overflow: ellipsis;
+                    width: 300px;
+                }
+                
+                #pac-input:focus {
+                    border-color: #4d90fe;
+                }
+                
+                .pac-container {
+                    font-family: Roboto;
+                }
+                
+                div.login{display:none !important;}
+                #type-selector {
+                    color: #fff;
+                    background-color: #4d90fe;
+                    padding: 5px 11px 0px 11px;
+                }
+                
+                #type-selector label {
+                    font-family: Roboto;
+                    font-size: 13px;
+                    font-weight: 300;
+                }
+                #map-textbox input{padding:5px !important;}
+                .enter-new{ width:65% !important;padding:5px !important;}
+                .login-control{display:none !important;}
+                @media (min-width:320px;) and (max-width:480px;){
+                    
+                    #pac-input{ width:90% !important;padding: 5px !important;}
+                }
+                </style>
+                
+                
+                <!-- Bootstrap -->
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                    <link href="css/style.css" rel="stylesheet">
+                        
+                   
+                   
+    </head>
+    <body>
+        <div id="map-textbox" style="position:absolute; top:0%;left:0;">
+            <input id="pac-input" class="controls enter-new text-left" type="text"
+                placeholder="Enter a location">
+                </div>
+        <!--<div id="type-selector" class="controls">
+         <input type="radio" name="type" id="changetype-all" checked="checked">
+         <label for="changetype-all">All</label> <input type="radio"
+         name="type" id="changetype-establishment"> <label
+         for="changetype-establishment">Establishments</label> <input
+         type="radio" name="type" id="changetype-address"> <label
+         for="changetype-address">Addresses</label> <input type="radio"
+         name="type" id="changetype-geocode"> <label
+         for="changetype-geocode">Geocodes</label>
+         </div> -->
+        <div id="map" style="margin-top:20px;"></div>
+        
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group"
+                aria-label="group button">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" role="button"
+                        id="mybutt">Change</button>
+                </div>
+            </div>
+        </div>
+        
+      
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        
+        <script type="text/javascript" src="js/internet_connection.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAVkKvBy7RncxYqyGVPXiM9QSZtFSdcf7I&libraries=places&callback=initGeolocation">
+        </script>
+    
+        <script type="text/javascript">
+            
+            sessionStorage.setItem("back_slide3","2");
+            $('.enter-new').click(function(){
+                                  
+                                  $('#pac-input').css('width','90%');
+                                  
+                                  });
+                                  
+            function initGeolocation()
+            {
+                if( navigator.geolocation )
+                {
+                    // Call getCurrentPosition with success and failure callbacks
+                    navigator.geolocation.getCurrentPosition( success, fail );
+                }
+                else
+                {
+                    //alert("Sorry, your browser does not support geolocation services.");
+                }
+            }
+        var markers=new Array();
+        function success(position) {
+            var longitude = position.coords.longitude;
+            var latitude = position.coords.latitude;
+            var latilong = new google.maps.LatLng(latitude, longitude);
+            var mapOptions = {
+                center: latilong,
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            /*var marker = new google.maps.Marker({
+             position: latilong,
+             map: map,
+             title: 'Current Location'
+             });*/
+            
+            
+            /* var map = new google.maps.Map(document.getElementById('map'), {
+             center: {lat: 12.9562, lng: 77.7019},
+             zoom: 13
+             });*/
+            var input = /** @type {!HTMLInputElement} */
+            document.getElementById('pac-input');
+            var types = document.getElementById('type-selector');
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+            
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                                                map: map,
+                                                anchorPoint: new google.maps.Point(0, -29)
+                                                });
+                                                
+                                                autocomplete.addListener('place_changed', function() {
+                                                                         infowindow.close();
+                                                                         marker.setVisible(false);
+                                                                         var place = autocomplete.getPlace();
+                                                                         var latlng = autocomplete.getPlace().geometry.location;
+                                                                         var geocoder = new google.maps.Geocoder;
+                                                                         var latitude_value=autocomplete.getPlace().geometry.location.G;
+                                                                         var langitude_value=autocomplete.getPlace().geometry.location.K;
+                                                                         sessionStorage.setItem("lat",latitude_value);
+                                                                         sessionStorage.setItem("lng",langitude_value);
+                                                                         // geocodeLatLng(geocoder, map, infowindow,latlng);
+                                                                         if (!place.geometry) {
+                                                                         window.//alert("Autocomplete's returned place contains no geometry");
+                                                                         return;
+                                                                         }
+                                                                         // If the place has a geometry, then present it on a map.
+                                                                         if (place.geometry.viewport) {
+                                                                         map.fitBounds(place.geometry.viewport);
+                                                                         } else {
+                                                                         map.setCenter(place.geometry.location);
+                                                                         map.setZoom(17);  // Why 17? Because it looks good.
+                                                                         }
+                                                                         marker.setIcon(/** @type {google.maps.Icon} */({
+                                                                                                                        url: place.icon,
+                                                                                                                        size: new google.maps.Size(71, 71),
+                                                                                                                        origin: new google.maps.Point(0, 0),
+                                                                                                                        anchor: new google.maps.Point(17, 34),
+                                                                                                                        scaledSize: new google.maps.Size(35, 35)
+                                                                                                                        }));
+                                                                         marker.setPosition(place.geometry.location);
+                                                                         //alert("place.geometry.location "+place.geometry.location);
+                                                                         marker.setVisible(true);
+                                                                         
+                                                                         var address = '';
+                                                                         if (place.address_components) {
+                                                                         address = [
+                                                                                    (place.address_components[0] && place.address_components[0].short_name || ''),
+                                                                                    (place.address_components[1] && place.address_components[1].short_name || ''),
+                                                                                    (place.address_components[2] && place.address_components[2].short_name || '')
+                                                                                    ].join(' ');
+                                                                         
+                                                                         for (var i=0; i<place.address_components.length;i++)
+                                                                         {
+                                                                         for (var j=0;j<place.address_components[i].types.length;j++)
+                                                                         {
+                                                                         if (place.address_components[i].types[j] == "postal_code")
+                                                                         {
+                                                                         zip_code = place.address_components[i].long_name;
+                                                                         sessionStorage.setItem('NewLocation_Zip',zip_code);
+                                                                         }
+                                                                         }
+                                                                         }
+                                                                         }
+                                                                         
+                                                                         var formatted_address=place.formatted_address;
+                                                                         
+                                                                         //infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + formatted_address);
+                                                                         infowindow.setContent(formatted_address);
+                                                                         //alert("place.name "+place.name);
+                                                                         //alert("address " +address);
+                                                                         // var address = place.name+address;
+                                                                         // alert(longitude + ' , '+latitude);
+                                                                         sessionStorage.setItem('NewLocation',formatted_address);
+                                                                         // alert("address "+address);
+                                                                         infowindow.open(map, marker);
+                                                                         });
+                                                                         
+                                                                         // Sets a listener on a radio button to change the filter type on Places
+                                                                         // Autocomplete.
+                                                                         function setupClickListener(id, types) {
+                                                                             var radioButton = document.getElementById(id);
+                                                                             radioButton.addEventListener('click', function() {
+                                                                                                          autocomplete.setTypes(types);
+                                                                                                          });
+                                                                         }
+                                                                         
+                                                                         setupClickListener('changetype-all', []);
+                                                                         k('changetype-address', ['address']);
+                                                                         setupClickListener('changetype-establishment', ['establishment']);
+                                                                         setupClickListener('changetype-geocode', ['geocode']);
+        }
+        function fail()
+        {
+            // Could not obtain location
+            // alert("Sorry, n");
+        }
+        
+        
+        /* function geocodeLatLng(geocoder, map, infowindow,input) {
+         //var input = document.getElementById('latlng').value;
+         
+         var lat_lng = input.toString();
+         var lat_lng_str = lat_lng.substring(1,lat_lng.length-1);
+         
+         var latlngStr = lat_lng_str.split(',',2);
+         //alert("latlngstr :"+   latlngStr);
+         var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+         geocoder.geocode({'location': latlng}, function(results, status) {
+         if (status === google.maps.GeocoderStatus.OK) {
+         if (results[1])
+         {
+	        map.setZoom(11);
+         for(var i = 0; i < latlngStr.length; i++)
+         {
+         var marker = new google.maps.Marker({
+         position: latlng,
+         map: map
+         });
+         markers.push(marker);
+         }
+         sessionStorage.setItem('NewLocation',results[1].formatted_address);
+	        infowindow.setContent(results[1].formatted_address);
+         sessionStorage.setItem('NewLocation',results[1].formatted_address);
+	        infowindow.open(map, marker);
+         }
+         else
+         {
+	        window.alert('No results found');
+         }
+         }
+         else
+         {
+         window.alert('Geocoder failed due to: ' + status);
+         }
+         });
+         } */
+        $("#mybutt").click(function(){
+                           
+                           window.location="slide13a.html";
+                           
+                           
+                           });
+    </script>
+    </body>
+</html>

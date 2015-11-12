@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>slide 19</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+	
+
+
+  </head>
+  <body>
+<!--    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+<!--        <div class="container">-->
+<!--        -->
+<!--            <div class="text-center" style="color:#fff;padding-top: 5px;"><h4>Fixit Pro Sign-up</h4></div>-->
+<!--        </div>-->
+<!--       -->
+<!--    </nav>-->
+<nav class="navbar navbar-inverse navbar-top" role="navigation">
+    <!-- <div class="container"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Sign-up</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+<!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--            id="settings_button">-->
+<!--            <span class="sr-only">Toggle navigation</span> <span-->
+<!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                    class="icon-bar"></span>-->
+<!--        </button>-->
+        <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+    </div>
+</nav>
+
+
+    <section style="margin-top:0px;color:#000" id="main">
+      <form  name="paymentDetails" id="form19"> 
+      <div class="container" id="MarginBottom">
+          <div class="form-group">
+              <label for="exampleInputEmail1">Register Your Card and Connect with Service Providers</label>
+          </div>
+
+		  <div class="form-group">
+              
+            <label for="exampleInputEmail1">Name on Credit Card<span>*</span></label>
+            <input type="text" class="form-control" name="ccname" id="ccid"  onkeyup="this.value=this.value.replace(/[^A-Za-z_ ]/g,'');"  onblur="return validateCCname();">
+            <div id="errorBox_creditcard" class="alertField"></div>
+          </div>
+          
+          <div class="form-group">
+        <div class="row">
+	        <div class="col-sm-12 col-xs-12">
+	          <label for="exampleInputEmail1">Card Number<span>*</span></label>
+	        </div>
+	        <div class="col-xs-9 col-sm-9">
+	          <input type="number" name="cardno" class="form-control" id="cardnum"  maxlength="16" onkeyup="if(this.value.length>16){this.value='this.value';}"onblur="return getCardType(this.value);" onchange="return validateCCnumber();"  >
+	        </div>
+	        <div class="col-xs-3 col-sm-3" id="image">
+	        	<!--  <img src="img/master-active.png" class="img-responsive"> -->
+	        </div>
+           <div id="errorBox_cardno" class="alertField"></div>
+          </div>
+        </div>
+       
+         <div class="form-group">
+          <div class="row">
+            <div class="col-md-12"><label for="exampleInputEmail1">Expiration Date<span>*</span></label></div>
+            <div class="col-xs-6 col-sm-6">
+              <select class="form-control" name="month" id="month"> <!-- onchange="return validateExpDate();" > -->
+              	<option>Select Month</option>
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+                <option>06</option>
+                <option>07</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option> 
+              </select>
+              
+            </div>
+            <div class="col-xs-6 col-sm-6">
+              <select class="form-control" name="date" id="year" onchange="validateExpDate();">
+              	<option>Select Year</option>
+                <option>2015</option>
+                <option>2016</option>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+                <option>2027</option>
+                <option>2028</option>
+                <option>2029</option>
+                <option>2030</option>
+                <option>2031</option>
+                <option>2032</option>
+                <option>2033</option>
+                <option>2034</option>
+                <option>2035</option>
+              </select>
+             
+            </div>
+          </div>
+           <div id="errorBox_expdate" class="alertField"></div>
+        </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6">
+                <label for="exampleInputEmail1">Security Code<span>*</span></label>
+              <input type="number" name="seccode" class="form-control" id="scode"  maxlength="4" onkeyup="if(this.value.length>4){this.value='this.value';}"  onblur="return validateSeccode();"> <!-- onkeyup="this.value=this.value.replace(/[^0-9]+/g, '');" -->
+               <div id="errorBox_seccode" class="alertField"></div>
+              </div>
+              <div class="col-xs-6 col-sm-6">
+                <label for="exampleInputPassword1">Zip Code<span>*</span></label>
+                <input type="number" name="zcode" class="form-control" id="zipcode" maxlength="6" onkeyup="if(this.value.length>5){this.value='this.value';}"  onblur="validateZipcode();" > 
+              <div id="errorBox_Zipcode" class="alertField"></div>
+              </div>
+            </div>
+          </div>      
+
+      </div>  
+      </div>     
+      <div class="modal-footer navbar-bottom" id="button" style="position:fixed;bottom:0;">
+        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+<!--          <div class="btn-group" role="group">-->
+            <button type="button" class="btn btn-default" role="button" id="mybutt" onclick="return saveDetails();">Submit</button>
+<!--          </div>-->
+        </div>
+      </div>
+
+      </form>
+    </section>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    
+    
+    
+    <script type="text/javascript">
+        window.onload = function(){
+            sessionStorage.setItem("userType","unlogged");
+        }
+    
+    $("#back-button-id").click(function(){
+                               // window.history.go(-1);
+                               window.location="slide14.html";
+                               });
+    
+    //Validation For All the Fields
+    function validateCCname()
+    {
+        var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+        var cname=document.paymentDetails.ccname.value;
+        //alert(cname);
+        /* var cardno=document.paymentDetails.cardno.value;
+         var expmonth=document.paymentDetails.month.value;
+         var expyear=document.paymentDetails.date.value;
+         var scode=document.paymentDetails.seccode.value;
+         var zipcode=document.paymentDetails.zcode.value;
+         var cardno_len=cardno.length;
+         var isValid = /^[0-9]{5,6}$/;
+         var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+         var pmaster= /^(?:5[1-5][0-9]{14})$/;
+         var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+         var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+         var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+         var pamerica = /^(?:3[47][0-9]{13})$/;
+         var cvvno=/^[0-9]{3,4}$/; */
+        
+        // Validation for Credit care name
+        if( cname == "" )
+        {
+            //document.paymentDetails.ccname.focus() ;
+            document.getElementById("errorBox_creditcard").innerHTML = "Enter Credit Card Name";
+            return false;
+        }
+        if(cname.length < 3 || cname.length > 51 )
+        {
+            // document.paymentDetails.ccname.focus();
+            document.getElementById("errorBox_creditcard").innerHTML = "Credit Card Name Must contain 3 to 50 Characters";
+            return false;
+        }
+        else if(!regx.test(cname))
+        {
+            //document.paymentDetails.ccname.focus();
+            document.getElementById("errorBox_creditcard").innerHTML = "Card Name must contain characters only.";
+            return false;
+        }
+        else
+        {
+            document.getElementById("errorBox_creditcard").innerHTML="" ;
+        }
+        return true;
+    }
+    
+    
+    //Validation For Credit card Number
+    function validateCCnumber()
+    {
+        var cardno=document.paymentDetails.cardno.value;
+        //alert(cardno);
+        var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        var pmaster= /^(?:5[1-5][0-9]{14})$/;
+        var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+        var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+        var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+        var pamerica = /^(?:3[47][0-9]{13})$/;
+        var cardno_len=cardno.length;
+        
+        if( cardno == "" )
+        {
+            //document.paymentDetails.cardno.focus() ;
+            document.getElementById("errorBox_cardno").innerHTML = "Enter Credit Card Number";
+            return false;
+        }
+        if(cardno != "")
+        {
+            
+            if(!(cardno.match(pvisa) || cardno.match(pmaster) || cardno.match(pdinner) || cardno.match(pdiscover) || cardno.match(pjcb) || cardno.match(pamerica)))
+            {
+                document.getElementById("errorBox_cardno").innerHTML ="Invalid  credit card number";
+                return false;
+            }
+            else
+            {
+                document.getElementById("errorBox_cardno").innerHTML="" ;
+            }
+        }
+        return true;
+    }
+    
+    
+    //Validation For Expiry Date
+    
+    function validateExpDate()
+    {
+        var today = new Date();
+        var month=today.getMonth();
+        var year=today.getFullYear();
+        var expmonth=document.paymentDetails.month.value;
+        //alert(expmonth);
+        var expyear=document.paymentDetails.date.value;
+        //alert(expyear);
+        //alert(expmonth + expyear);
+        if(expmonth != "Select Month" && expyear != "Select Year")
+        {
+            if (((month >= expmonth)||(month >= expmonth)) && (year >=expyear))
+            {
+                /* alert("data: " + ((month >= expmonth)||(month >= expmonth)) && (year >=expyear)); */
+                //alert("Time : " + selDate.getTime());
+                document.getElementById("errorBox_expdate").innerHTML="Card already expired!";
+                return false;
+            }
+            else
+            {
+                document.getElementById("errorBox_expdate").innerHTML="" ;
+            }
+        }
+        
+        else if(expmonth == "Select Month" && expyear == "Select Year")
+        {
+            document.getElementById("errorBox_expdate").innerHTML="Select month and year";
+            return false;
+        }
+        else if(expmonth != "Select Month" || expyear != "Select Year")
+        {
+            document.getElementById("errorBox_expdate").innerHTML="Select month and year";
+            return false;
+        }
+        else
+        {
+            document.getElementById("errorBox_expdate").style.display='none';
+            return false;
+        }
+        return true;
+    }
+    
+    
+    //Validation For Security Code
+    function validateSeccode()
+    {
+        var scode=document.paymentDetails.seccode.value;
+        //alert(scode);
+        var cvvno=/^[0-9]{3,4}$/;
+        
+        if( scode == "" )
+        {
+            //document.paymentDetails.seccode.focus() ;
+            document.getElementById("errorBox_seccode").innerHTML = "Enter Security code";
+            return false;
+        }
+        
+        
+        if(!(cvvno.test(scode)))
+        {
+            //document.paymentDetails.seccode.focus() ;
+            document.getElementById("errorBox_seccode").innerHTML = "Invalid Security code";
+            return false;
+        }
+        
+        else
+        {
+            
+            document.getElementById("errorBox_seccode").innerHTML="" ;
+        }
+        
+        return true;
+    }
+    //Validation For Zip Code
+    function validateZipcode()
+    {
+        var zipcode=document.paymentDetails.zcode.value;
+        //alert(zipcode);
+        var isValid = /^[0-9]{5,6}$/;
+        if( zipcode == "" )
+        {
+            //document.paymentDetails.zcode.focus() ;
+            document.getElementById("errorBox_Zipcode").innerHTML = "Enter Zipcode";
+            return false;
+        }
+        
+        // else
+        /*  if(zipcode != "")
+         {
+         
+         } */
+        else if(!(isValid.test(zipcode)))
+        {
+            //document.paymentDetails.zcode.focus() ;
+            document.getElementById("errorBox_Zipcode").innerHTML = "Enter valid Zipcode";
+            return false;
+        }
+        
+        else
+        {
+            
+            document.getElementById("errorBox_Zipcode").innerHTML="" ;
+        }
+        return true;
+    }
+    
+    
+    $('#ccid').on('keyup blur',function(){
+                  var node = $(this);
+                  node.val(node.val().replace(/[^A-Za-z]/g,'') ); }
+                  );
+                  
+                  $("#cardnum").keypress(function(){
+                                         var value = $(this).val();
+                                         value = value.replace(/[^0-9]+/g, '');
+                                         $(this).val(value);
+                                         });
+                                         
+                                         $("#scode").keypress(function(){
+                                                              var value = $(this).val();
+                                                              value = value.replace(/[^0-9]+/g, '');
+                                                              $(this).val(value);
+                                                              });
+                                                              
+                                                              $("#zipcode").keypress(function(){
+                                                                                     var value = $(this).val();
+                                                                                     value = value.replace(/[^0-9]+/g, '');
+                                                                                     $(this).val(value);
+                                                                                     });
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     function getCardType(number)
+                                                                                     {
+                                                                                         // visa
+                                                                                         var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+                                                                                         var pmaster= /^(?:5[1-5][0-9]{14})$/;
+                                                                                         var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+                                                                                         var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+                                                                                         var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+                                                                                         var pamerica = /^(?:3[47][0-9]{13})$/;
+                                                                                         
+                                                                                         if (number.match(pvisa) != null)
+                                                                                         {
+                                                                                             
+                                                                                             var image='<img src="img/visa-active.png">';
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             return false;
+                                                                                         }
+                                                                                         if (number.match(pmaster) != null)
+                                                                                         {
+                                                                                             var image='<img src="img/master-active.png">';
+                                                                                             //document.write(image)
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             //alert("visa");
+                                                                                             //alert(image);
+                                                                                             
+                                                                                             return false;
+                                                                                         }
+                                                                                         
+                                                                                         //Identify America Express Type
+                                                                                         
+                                                                                         if (number.match(pamerica) != null)
+                                                                                         {
+                                                                                             var image='<img src="img/amex-active.png">';
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             
+                                                                                             return false;
+                                                                                         }
+                                                                                         
+                                                                                         if (number.match(pdiscover) != null)
+                                                                                         {
+                                                                                             var image='<img src="img/discover-active.png">';
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             
+                                                                                             return false;
+                                                                                         }
+                                                                                         
+                                                                                         if (number.match(pdinner) != null)
+                                                                                         {
+                                                                                             var image='<img src="img/diners-active.png">';
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             
+                                                                                             return false;
+                                                                                         }
+                                                                                         
+                                                                                         
+                                                                                         if (number.match(pjcb) != null)
+                                                                                         {
+                                                                                             var image='<img src="img/jcb-active.png">';
+                                                                                             //document.write(image)
+                                                                                             document.getElementById("image").innerHTML=image;
+                                                                                             
+                                                                                             return "JCB";
+                                                                                         }	
+                                                                                         return "";
+                                                                                     }
+    
+    //
+    function saveDetails() 
+    
+    {
+        
+        var regx = /^[A-Za-z][-a-zA-Z ]+$/; 
+        var cname=document.paymentDetails.ccname.value;
+        var cardno=document.paymentDetails.cardno.value;
+        var expmonth=document.paymentDetails.month.value;
+        var expyear=document.paymentDetails.date.value;
+        var scode=document.paymentDetails.seccode.value;
+        var zipcode=document.paymentDetails.zcode.value;
+        var cardno_len=cardno.length;
+        var isValid = /^[0-9]{5,6}$/;
+        var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        var pmaster= /^(?:5[1-5][0-9]{14})$/;
+        var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+        var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+        var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+        var pamerica = /^(?:3[47][0-9]{13})$/;
+        var cvvno=/^[0-9]{3,4}$/; 
+        
+        
+        if(validateCCname() && validateCCnumber() && validateExpDate() && validateSeccode() && validateZipcode())
+        {
+            var fname=sessionStorage.getItem('FirstName');
+            var lname=sessionStorage.getItem('LastName');
+            var email=sessionStorage.getItem('Email');
+            var phone_no=sessionStorage.getItem('PhoneNo');
+            var country=sessionStorage.getItem('country');
+            var address=sessionStorage.getItem('address');
+            var city=sessionStorage.getItem('city');
+            var state=sessionStorage.getItem('state');
+            var mode=sessionStorage.getItem('Payment_Type');
+            var fix = sessionStorage.getItem('wecanfixtext');
+            var img_path = sessionStorage.getItem('image_paths');
+            var help = sessionStorage.getItem('help');
+            var location = sessionStorage.getItem('userlocation');
+            var kindofwork=sessionStorage.getItem('kindofwork');
+            var zipcode=sessionStorage.getItem('pin');
+            var day = sessionStorage.getItem('day');
+            var hours = sessionStorage.getItem('hours');
+            var cname=document.paymentDetails.ccname.value;
+            var cardno=document.paymentDetails.cardno.value;
+            var expmonth=document.paymentDetails.month.value;
+            var expyear=document.paymentDetails.date.value;
+            var scode=document.paymentDetails.seccode.value;
+            var zipcode=document.paymentDetails.zcode.value;
+            var pid_list = sessionStorage.getItem('pids');
+            var gcmid=localStorage.getItem('token');
+            //alert("slide 15 "+ gcmid);
+            if(pid_list != null)
+            {
+                //alert("PID List :"+pid_list);
+                pid_list = pid_list.substring(0, pid_list.length - 1);
+                $.ajax({
+                       type: "POST",
+                       url: "http://in.shikshainfotech.com/FixIT/unloggedusers.php?",
+                       data:'firstName='+fname+'&lastName='+lname+'&email='+email+'&phone='+phone_no+'&country='+country+'&address='+address+'&city='+city+'&state='+state+'&creditcard_name='+cname+'&creditcard_number='+cardno+'&expiration_month='+expmonth+'&expiration_year='+expyear+'&security_code='+scode+'&zip='+zipcode+'&gcmid='+gcmid+'&issue='+fix+'&photo='+img_path+'&howfast='+help+'&location='+location+'&pick=own&pids='+pid_list+'&kindOfWork='+kindofwork+'&zipcode='+zipcode+'&day='+day+'&time='+hours,
+                       success: function (data) {
+                       //alert("SUCCESS : "+JSON.stringify(data));
+                       var jid = data.jid;
+                       var oid = data.oid;
+                       sessionStorage.setItem('jid',jid);
+                       localStorage.setItem('oid',oid);
+                       //$('#Waiting_page').modal('show');
+                       window.location = "slide6.html";
+                       
+                       },
+                       error: function (jqXHR, textStatus, errorThrown) {
+                       //alert('Error'+ errorThrown + textStatus + jqXHR);
+                       }
+                       });
+            } 
+            
+            else
+            {
+                $.ajax({
+                       type: "POST",
+                       url: "http://in.shikshainfotech.com/FixIT/unloggedusers.php?",
+                       
+                       data:'firstName='+fname+'&lastName='+lname+'&email='+emailid+'&phone='+phone_no+'&creditcard_name='+cname+'&creditcard_number='+cardno+'&expiration_month='+expmonth+'&expiration_year='+expyear+'&security_code='+scode+'&zip='+zipcode+'&gcmid='+gcmid+'&issue='+fix+'&photo='+img_path+'&howfast='+help+'&location='+location+'&pick=own&kindOfWork='+kindofwork+'&zipcode='+zipcode+'&day='+day+'&time='+hours,
+                       success: function (data) {
+                       //alert("SUCCESS : "+JSON.stringify(data));
+                       var jid = data.jid;
+                       var oid = data.oid;
+                       //alert("JID :"+jid);
+                       sessionStorage.setItem('jid',jid);
+                       localStorage.setItem('oid',oid);
+                       window.location = "slide6.html";
+                       //$('#Waiting_page').modal('show');
+                       },
+                       error: function (jqXHR, textStatus, errorThrown) {
+                       //alert('Error'+ errorThrown + textStatus + jqXHR);
+                       }
+                       });
+            }
+            
+            
+        } 
+        
+        
+    }
+    
+        </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--<style>-->
+<!--body{-->
+<!--   margin:0;-->
+<!--}-->
+<!--</style>-->
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+        
+
+        
+</head>
+<body>
+    
+
+  
+  <nav class="navbar navbar-inverse navbar-top" role="navigation">
+      <div class="col-xs-2 col-sm-2 text-left"
+          style="color: #fff;  padding: 10px 0 0 10px  ; ">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+              id="back-button-id" onclick="location.href = 'slide4.html';">
+              <i class="fa fa-chevron-left"></i>
+          </button>
+      </div>
+      <div class="col-xs-8 col-sm-8 text-center"
+          style="color: #fff; padding: 15px 0 0 0px;">
+          <h4>MAP</h4>
+      </div>
+      <div class="col-xs-2 col-sm-2  navbar-header text-center" style="padding-top: 10px;">-->
+<!--          <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--              id="settings_button">-->
+<!--              <span class="sr-only">Toggle navigation</span> <span-->
+<!--                  class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                      class="icon-bar"></span>-->
+<!--          </button>-->
+<!--          -->
+     </div>
+  </nav>
+  
+    <div id="dvMap" style="width: 100%; height: 100%;margin-top:-20px;padding:">
+    </div>
+    <div class="modal-footer navbar-fixed-bottom" id="button">
+        <div class="btn-group btn-group-justified" role="group"
+            aria-label="group button">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" role="button"
+                    id="map-back-btn" onclick="location.href = 'slide4.html';">Back</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/internet_connection.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    window.onload = function ()
+    {
+        initGeolocation();
+    }
+function initGeolocation()
+{
+    if( navigator.geolocation )
+    {
+        // Call getCurrentPosition with success and failure callbacks
+        navigator.geolocation.getCurrentPosition( success, fail );
+    }
+    else
+    {
+        alert("Sorry, your browser does not support geolocation services.");
+    }
+}
+function success(position)
+{
+    var longitude = position.coords.longitude;
+    var latitude = position.coords.latitude;
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    var mapOptions = {
+        center: latlng,
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                     if (status == google.maps.GeocoderStatus.OK) {
+                     if (results[1])
+                     {
+                     //alert("Latitude: " + position.coords.latitude + "\r\nLongitude: " + position.coords.longitude);
+                     }
+                     }
+                     });
+                     var marker = new google.maps.Marker({
+                                                         position: latlng,
+                                                         map: map,
+                                                         title: 'Current Location'
+                                                         });
+}
+function fail()
+{
+    // Could not obtain location
+    alert("Sorry, n");
+}
+
+
+</script>
+
+</html>
+
+    

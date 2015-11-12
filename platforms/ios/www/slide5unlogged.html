@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 5</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+     <style type="text/css">
+            #largeImgPanel {
+                text-align: center;
+                visibility: hidden;
+                position: fixed;
+                z-index: 100;
+                top: 0; left: 0; 
+                width: 100%; height: 100%;
+                background-color: rgba(100,100,100, 0.5);
+            }
+        </style>
+
+
+  </head>
+  <body onload="getsessiondata(); getreviewdata(); getdatails();" >
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Profile</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+<!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--            id="settings_button">-->
+<!--            <span class="sr-only">Toggle navigation</span> <span-->
+<!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                    class="icon-bar"></span>-->
+<!--        </button>-->
+
+    </div>
+</nav>
+
+
+    <section style="margin-top:75px;color:#000">
+      <form>
+      <div class="container">
+          
+        <div class="media" style="margin-bottom: 5px;">
+            <div class="media-left">                
+                  <img class="media-object img-circle " id="getimage" src=""   style="min-width:100px;min-height:100px;max-width:100px;max-height:100px;" alt="...">
+            </div>
+            <div class="media-body">
+            <div id="val"></div>
+                <label for="exampleInputEmail1" id="getname"> name:</label><br>
+                <label class="details" for="exampleInputEmail1">Town, State: <span id="getadd"></span></label>
+                <label class="details" for="exampleInputEmail1">Range of Hourly Quote: <span id="getcharge"></span></label>
+               
+                <label class="details" for="exampleInputEmail1" id="overallstar">Rating: </label> 
+                
+                <img src="img/icon-gps-b.png" class="add-icon pull-right" alt="" id="imageval">
+            </div> 
+        </div>
+          
+      </div>
+          
+          <div class="form-group" id="MarginBottom">
+            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active" style="width:50%"><a href="#DETAILS" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true" >DETAILS</a></li>
+              <li role="presentation" class="" style="width:50%"><a href="#REVIEWS" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false" >REVIEWS</a></li>
+            </ul>
+              
+    <div id="myTabContent" class="tab-content">
+        
+      <!--DETAILS-->  
+      <div role="tabpanel" class="tab-pane fade active in" id="DETAILS" aria-labelledby="home-tab">
+          
+          <div id="DetailsContentDIV">
+              <h4>Expertise</h4>
+              <div class="container">
+               <div class="row" id="profileDetails">
+               <div class="col-md-12">
+                <div class="input_fields_wrap1">  
+                </div>  
+               </div>
+               </div>
+               </div> 
+          </div>
+          
+          <div id="DetailsContentDIV" class="cerpic">
+              <h4>Certificats &amp; Licenses</h4>
+              <div class="container">
+              <div class="row" id="profileDetails">
+                  <div class="certificate">
+
+                      <!-- <div class="col-xs-12 col-sm-12 text-left">
+                          <p>Master Plumber's License (City of New York) No.107</p>
+                      </div>  -->                     
+
+                  </div>
+              </div>              
+              </div>
+          </div>
+          <div id="DetailsContentDIV">
+              <h4>Accepted Payment Methods</h4>
+              <div class="container">
+                  <div class="row" id="profileDetails">
+
+                      <div class="col-xs-12 col-sm-12 text-left">
+                          <img src="img/payment-icons/master-active.png">
+                          <img src="img/payment-icons/visa-active.png">
+                          <img src="img/payment-icons/amex-active.png">
+                          <img src="img/payment-icons/diners-active.png">
+                          <img src="img/payment-icons/discover-active.png">
+                          <img src="img/payment-icons/paypal-active.png">
+                      </div>                      
+
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      <!-- //DETAILS-->  
+       
+      <!--REVIEWS-->            
+       <div role="tabpanel" class="tab-pane fade" id="REVIEWS" aria-labelledby="profile-tab">
+      </div> 
+      <!-- //REVIEWS-->            
+      
+    </div>
+              
+          </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                <button type="button" id="contact-btn-id" class="btn btn-default" role="button" >Contact</button>
+              </div>
+              <!--<div class="btn-group" role="group">
+                <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">I'll Pick</button>
+              </div>--> 
+            </div>
+        </div>
+ 
+          
+      </form>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $("#contact-btn-id").click(function(){
+                    var contact = sessionStorage.getItem("contact_sp");
+                
+                   // alert(contact);
+                    window.location.href="tel:"+contact;
+        });
+    /* $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').focus()
+    }) */
+   // function showmodel()
+    //{
+    //	 $('#myModal').modal('show');
+    //}
+    
+
+        $("#back-button-id").click(function(){
+                window.location="slide4.html";
+        });
+        
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+
+            var details=sessionStorage.getItem('details');
+            var image = "http://in.shikshainfotech.com/FixIT/Uploads/certificates/";
+            var jsonData_CerPic = "";
+            var arr=new Array();
+            arr=details.split("&");
+            var arr_pid=arr[6];
+           
+            //alert(arr_pid);
+
+          function getsessiondata()
+          {
+		            var details=sessionStorage.getItem('details');
+		            //alert(details);
+		            var arr=new Array();
+		            arr=details.split("&");
+		            var arr_pid=arr[6];
+                    var id=0;
+		            //alert(arr_pid);
+		
+		            document.getElementById('getimage').src=arr[0];
+		            document.getElementById('getname').innerHTML=arr[1];
+		            document.getElementById('getadd').innerHTML=arr[2] +','+ arr[3];
+		            document.getElementById('getcharge').innerHTML=arr[4];
+                    var contact = arr[7];
+                    sessionStorage.setItem("contact_sp",contact);
+                var rating = arr[5];
+                //alert("RATING :"+rating);
+
+                for(var rate=1;rate<=rating;rate++)
+                {
+                 
+                  $("#overallstar").append('<span class="fa fa-star"></span>');
+                 
+                }
+                
+          }
+           function getdatails()
+          {
+            var detailsID=0;
+            var wrapper = $(".input_fields_wrap1");
+                $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/serviceprovider_details.php?",
+                 data:"pid="+arr_pid ,
+                 success: function (data)  {
+                   var jsonData = JSON.stringify(data);
+                   console.log(jsonData);
+                   var providerArray = JSON.parse(jsonData);
+                  
+                   var serviceoffered_data = JSON.stringify(providerArray[0]);
+                   var overall_data = JSON.stringify(providerArray[1]);
+                   var certificates_data = JSON.stringify(providerArray[2]);
+                   
+                  //alert(serviceoffered_data);
+                   var services = JSON.parse(serviceoffered_data);
+                   var rating = JSON.parse(overall_data);
+                   var certificates = JSON.parse(certificates_data);
+                  //alert("length"+certificates.length);
+                   for( var i=0;i<services.length;i++)
+                   {
+                     
+                     detailsID=detailsID+1
+                     var offers=JSON.stringify(services[i]).split('"').join('');
+                     var stars=JSON.stringify(rating[i]).split('"').join('');
+                     //alert(rating);
+                     
+                     $(wrapper).append('<div class="row"><div class="col-xs-6 col-sm-6 text-left"><label class="details" for="exampleInputEmail1">'+ offers+'</label></div><div class="col-xs-6 col-sm-6 text-left" id="detailsDiv'+detailsID+'"></div></div>');
+
+                     for(var detail_rating=1;detail_rating<=stars;detail_rating++)
+                     {
+                      $("#detailsDiv"+detailsID).append('<span class="fa fa-star"></span>');
+                     }
+                   }
+
+                   for(var j=0;j<certificates.length;j++)
+                    {
+                      
+                         var cer=JSON.stringify(certificates[j]).split('"').join('');
+                          jsonData_CerPic = image+cer;
+                          //alert("cer : "+jsonData_CerPic);
+                          var splitExt = jsonData_CerPic.split('.');
+                          var ext = splitExt[splitExt.length-1];
+                          var splitFileName = jsonData_CerPic.split('/');
+                          var fileName = splitFileName[splitFileName.length-1];
+                          var str = new String();
+                          if(ext=="jpg"||ext=="png"||ext=="jpeg"){
+                              str = '<div class="col-xs-2 col-sm-2" data-position-to="window"><img src="'+jsonData_CerPic+'"  onclick="imagefunction(\''+jsonData_CerPic+'\');" class="img-circle" style="margin-bottom:5px;min-width:50px;min-height:50px;max-width:50px;max-height:50px;border: 1px solid #E4E4E4;"></div><div id="largeImgPanel" onclick="hideMe(this);"><img src="'+jsonData_CerPic+'" id="largeImg" style="height: 100%; margin: 0; padding: 0;" /></div>';
+                          }
+                          else{
+                               str = '<div class="col-xs-2 col-sm-2" data-position-to="window"><a href="'+jsonData_CerPic+'"><img src="img/documents_placeholder.png"  class="img-circle" style="margin-bottom:5px;min-width:50px;min-height:50px;max-width:50px;max-height:50px;border: 1px solid #E4E4E4;"></a></div>';
+                          }
+                         $('.certificate').append(str);
+                    }
+                }
+               
+          });
+         }
+          function imagefunction(imgName)
+          {
+				document.getElementById('largeImg').src = imgName;
+                showLargeImagePanel();
+                unselectAll();
+            }
+          function showLargeImagePanel() 
+          {
+             //alert("showLargeImagePanel");
+                document.getElementById('largeImgPanel').style.visibility = 'visible';
+          }
+            function unselectAll()
+            {
+              
+                if(document.selection) document.selection.empty();
+                if(window.getSelection) window.getSelection().removeAllRanges();
+            }
+            function hideMe(obj) 
+            {
+            	obj.style.visibility = 'hidden';
+           }
+
+            $("#imageval").click(function()
+                    {
+                   	
+                    window.location="map.html";
+                    }
+                 );
+            
+           
+           // POPUP WINDOW:
+   var scrT = $(window).scrollTop();
+   $(window).scroll(function(){
+      scrT = $(window).scrollTop(); 
+   });
+
+   // GET and use WINDOW HEIGHT //
+    $.getDocHeight = function(){
+    var D = document;
+    return Math.max(Math.max(D.body.scrollHeight, D.documentElement.scrollHeight), Math.max(D.body.offsetHeight, D.documentElement.offsetHeight), Math.max(D.body.clientHeight, D.documentElement.clientHeight));
+  };   // POPUP WINDOW (lightbox for video and others) 
+    // GET WINDOW SCROLLtop OFFSET
+  $('[data-full]').on('click', function(e){
+      
+    e.preventDefault();
+      
+    $('#jQ_popup').css({
+      top: scrT+15
+    }).find('img').remove();
+    $('#jQ_popup_window').height($.getDocHeight).fadeTo(0,0).css({
+      marginLeft:0
+    }).fadeTo(600,1);
+    
+    var imgToLoad = $(this).data('full');
+      $('<img>', {src:imgToLoad, width:'100%'}).appendTo('#jQ_popup');    
+  });
+  // close popup
+  $('#jQ_popup_close, #jQ_popup_window').on('click', function(){    
+    $('#jQ_popup_window').fadeTo(600,0,function(){
+      $(this).hide();     
+    });
+  });
+  $('#jQ_popup').on('click', function(ev){
+    ev.stopPropagation();
+  });
+  // end POPUP WINDOW
+           
+      
+        
+         function getreviewdata()
+          {
+            
+            var reviewID=0;
+            var wrapper = $("#REVIEWS");
+            //alert("Review is calling");  
+            $.ajax({
+                type: "POST",
+                url: "http://in.shikshainfotech.com/FixIT/serviceprovider_reviews.php?",
+                data: 'pid='+arr_pid ,
+                success: function (response) {
+                                   
+                       for (var i = 0; i < response.length; i++) {
+                       var jsonData_service_name=JSON.stringify(response[i].service_name).split('"').join('');
+                         var jsonData_expertise = JSON.stringify(response[i].expertise).split('"').join('');
+                         var jsonData_professionalism = JSON.stringify(response[i].professionalism).split('"').join('');
+                         //var name = jsonData_fullname+"  "+jsonData_lastName;
+                         var overall = JSON.stringify(response[i].overall).split('"').join('');
+                        // jsonData_profilePic = image+profile_pic;
+                         var jsonData_comments = JSON.stringify(response[i].comments).split('"').join('');
+                         var jsonData_reviewOn = JSON.stringify(response[i].reviewOn).split('"').join('');
+                         var jsonData_owner_firstName= JSON.stringify(response[i].owner_firstName).split('"').join('');
+                         var jsonData_owner_lastName = JSON.stringify(response[i].owner_lastName).split('"').join('');
+                         var name= jsonData_owner_firstName +" "+jsonData_owner_lastName;
+                                      
+            			 reviewID=reviewID+1
+
+						$(wrapper).append('<div id="ReviewDetailsDIV"> ' +
+                                 '<h4>"' + jsonData_service_name +'"<span class="pull-right">"' + jsonData_reviewOn+'"</span></h4>'+
+                                 '<div class="container">'+
+                                     '<div class="media">'+
+                                         '<div class="media-left text-center">'+
+                                           '<a href="#">'+
+                                             '<img class="media-object img-circle" src="img/placeholder64X64.jpg" alt="...">' +
+                                               '<label for="exampleInputEmail1">"'+ name +'"</label>'+
+                                           '</a>'+
+                                         '</div>'+
+                                         '<div class="media-body">'+
+                                             '<div class="arrow_box pull-right">'+
+
+                                                 '<div class="row">'+
+                                                     '<div class="col-xs-6 col-sm-6">'+
+                                                         '<label class="details" for="exampleInputEmail1">Expertise</label>' +
+                                                     '</div>' +
+                                                     '<div class="col-xs-6 col-sm-6 text-right" id="expertise'+reviewID+'">' +
+                                                    ' </div>' +
+                                                 '</div>' +
+                                                 '<div class="row">' +
+                                                     '<div class="col-xs-6 col-sm-6">'+
+                                                         '<label class="details" for="exampleInputEmail1">Professionalism</label>' +
+                                                     '</div>' +
+                                                     '<div class="col-xs-6 col-sm-6 text-right" id="professionalism'+reviewID+'">' +
+                                                     '</div>'+
+                                                 '</div>' +
+
+                                                 '<div class="row">' +
+                                                     '<div class="col-xs-6 col-sm-6">' +
+                                                         '<label class="details" for="exampleInputEmail1">Overall</label>' +
+                                                     '</div>' +
+                                                    ' <div class="col-xs-6 col-sm-6 text-right" id="overall'+reviewID+'">' +
+                                                     '</div>' +
+                                                 '</div>' +
+                                                 '<div class="row">' +
+                                                     '<div class="col-xs-12 col-sm-12">' +
+                                                       '<h5><strong>COMMENTS</strong></h5>' +
+                                                       '<p>"' + jsonData_comments +'"</p>' +
+                                                     '</div>'+
+                                                 '</div>'+
+
+                                             '</div> ' +
+                                        ' </div>' +
+                                       '</div>' +
+                                 '</div> '+
+                             '</div>'
+                             ); 
+                         for(var e=1;e<=jsonData_expertise;e++)
+                          {
+                             $("#expertise"+reviewID).append('<span id="starRate" class="glyphicon glyphicon-star">');
+                          }
+                        for(var p=1;p<=jsonData_professionalism;p++)
+                          {
+                            $("#professionalism"+reviewID).append('<span id="starRate" class="glyphicon glyphicon-star">');
+                          }
+                        for(var o=1;o<=overall;o++)
+                          {
+                            $("#overall"+reviewID).append('<span id="starRate" class="glyphicon glyphicon-star">');
+                          }
+
+                      } 
+                }
+            });
+         }
+  
+         function senddetails()
+     	 {
+     		 var oid=localStorage.getItem('oid');
+             var wecanfixit=sessionStorage.getItem('wecanfixtext');
+             var image_paths= sessionStorage.getItem('image_paths');
+             var help= sessionStorage.getItem('help');
+             var userlocation=sessionStorage.getItem('userlocation');
+             //alert("pid is :" + arr_pid);
+             //alert("oid is : "+ oid);
+             //alert("issue is : "+ wecanfixit+image_paths+ help+ userlocation);
+             	$.ajax({
+                     type: "POST",
+                     url:"http://in.shikshainfotech.com/FixIT/postajob.php?",
+                     data:'oid='+oid+'&issue='+wecanfixit+'&photo='+image_paths+'&howfast='+help+'&location='+userlocation+'&pick=own&pids='+arr_pid,
+                   success: function (data) {
+                   //alert("SUCCESS : "+data);
+                   
+                   //$('#myModal').modal('show');
+                 window.location = "slide6.html";
+                 }
+                
+                 }); 
+             
+     	}
+         
+         $("#image").click( function()
+                 {
+                
+                   //sessionStorage.setItem('oid',oid);
+                 
+                 window.location="slide28.html";
+                 }
+              );
+  
+  
+    </script>
+
+  </body>
+</html>

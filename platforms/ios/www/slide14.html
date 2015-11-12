@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>slide 14</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/slider.css" rel="stylesheet">
+    <link rel="stylesheet" href="PhonePlugin/build/css/intlTelInput.css">
+        <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="PhonePlugin/build/css/demo.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>#radio input.radio:empty ~ label {
+        position: relative;
+        float: left;
+        line-height: 2.5em;
+        text-indent: 3.25em;
+        /* margin-top: 2em; */
+        left: 30px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+            top: -28px;
+        /* -webkit-user-select: auto !important; */
+        /* -moz-user-select: auto !important; */
+        /* -ms-user-select: auto !important; */
+        /* user-select: auto !important; */
+    }
+    
+    #cardType #radio input.radio:empty ~ label {
+        border: 1px solid #ccc !important;
+        margin-top: 0px;
+    }
+        </style>
+  </head>
+  <body>
+      <nav class="navbar navbar-inverse navbar-top" role="navigation">
+          <!-- <div class="container"> -->
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="col-xs-2 col-sm-2 text-left"
+              style="color: #fff;  padding: 10px 0 0 10px  ; ">
+              <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  id="back-button-id" >
+                  <i class="fa fa-chevron-left"></i>
+              </button>
+          </div>
+          <div class="col-xs-8 col-sm-8 text-center"
+              style="color: #fff; padding-top: 15px;">
+              <h4>Sign-up</h4>
+          </div>
+          <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+              <!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+              <!--            id="settings_button">-->
+              <!--            <span class="sr-only">Toggle navigation</span> <span-->
+              <!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+              <!--                    class="icon-bar"></span>-->
+              <!--        </button>-->
+              <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+          </div>
+      </nav>
+
+
+    <section style="margin-top:0px;margin-bottom: 0px; color: #000; height:100%;" id="main">
+      <form name="myform">
+      <div class="container">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6">
+                <label for="firstName">First Name<span>*</span></label>
+                <input type="text" class="form-control" id="firstname" name="Name" onkeyup="this.value=this.value.replace(/[^A-Za-z]/g,'');" onblur="return validateFirstName();">
+                <div id="errorBox_firstname" class="alertField"></div>
+              </div>
+              <div class="col-xs-6 col-sm-6">
+                <label for="lastName">Last name<span>*</span></label>
+                <input type="text" name="LastName" class="form-control" id="lastname" onkeyup="this.value=this.value.replace(/[^A-Za-z]/g,'');" onblur="return validateLastName(); ">
+                <div id="errorBox_lastname" class="alertField"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email1">Email address<span>*</span></label>
+            <input type="email" name="Email" class="form-control" id="emailid" onblur="return validateEmailId();">
+            <div id="errorBox_email_id" class="alertField"></div>
+          </div>
+          <div class="form-group">        
+          <div><label for="exampleInputEmail1">Phone Number<span>*</span></label></div>
+          <!-- <img src="img/Screenshots.png" class="img-responsive"> -->
+          <div><input type="tel" name="phoneno" class="form-control" id="phoneNumber" onblur="validatePhoneNumber();"></div>
+          <div id="errorBox_phoneno" class="alertField"></div>
+        </div>
+         <!-- <div class="form-group">
+					<label for="exampleInputPassword1">Countries<span>*</span></label> 
+					<select id="countries" name="country" class="form-control" onchange="return validatecountry();"></select>
+					<div id="errorBox_country" class="alertField"></div>
+				</div> 
+				
+				<div class="form-group">
+				
+            <label for="exampleInputEmail1">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber">
+            <div id="errorBox_phoneno" class="alertField"></div>
+          </div>
+				
+				<div class="form-group">
+					<label for="exampleInputEmail1">Company Name (Optional)</label> <input
+						type="text" name="Company" class="form-control" id="company">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Address<span>*</span></label> <input
+						type="text" name="address" class="form-control" id="address"
+						onchange="return validateAddress();">
+
+					<div id="errorBox_address" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputEmail1">City<span>*</span>
+							</label> <input type="text"
+								name="city" class="form-control" id="city">
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputPassword1">State</label> <select
+								name="state" id="states" class="form-control">
+								
+							</select>
+						</div>
+					</div>
+					<div id="errorBox_city" class="alertField"></div>
+				</div>
+          
+          
+ -->
+         
+<!--        ---------------------------------------------------------------------------------------------------- -->
+          <div class="form-group" id="cardType">
+            <div class="row btn-group" id="radio"  style="width:100%" role="group">
+            	<div class="col-xs-12 col-sm-4">
+              <div id="errorBox_paymentmode" class="alertField"></div>
+                    
+					<input type="radio" value="1" name="radio" id="PayPal" class="radio"/>
+                    <label for="PayPal">Pay with PayPal</label>
+				</div>
+
+				<div class="col-xs-12 col-sm-4">
+                    
+					<input type="radio" value="2" name="radio" id="Card" class="radio"/>
+                    <label for="Card">Pay with Credit Card</label>
+				</div>
+
+            </div>
+          </div>
+      </div>
+          
+      <div class="modal-footer navbar-bottom" id="button">
+        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" role="button" id="continue" style="padding:20px 0 35px 0 !important">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      </form>
+    </section>
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="PhonePlugin/build/js/intlTelInput.js"></script>
+    <script src="js/modernizr-2.8.3.min.js"></script>
+    <script src="js/bootstrap-slider.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var fn = sessionStorage.getItem('FirstName');
+            if(fn!=null){
+                document.myform.Name.value = sessionStorage.getItem('FirstName');
+                document.myform.LastName.value = sessionStorage.getItem('LastName');
+                document.myform.Email.value = sessionStorage.getItem('Email');
+                document.myform.phoneno.value = sessionStorage.getItem('PhoneNo');
+                var paymentmode = sessionStorage.getItem('Payment_Type');
+                if(paymentmode == 1){
+                    document.getElementById('PayPal').checked = true;
+                }
+                else{
+                    document.getElementById('Card').checked = true;
+                }
+            }
+        }
+        
+        
+        
+        $("#back-button-id").click(function(){
+                window.location="slide13a.html";
+        });
+        
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+   
+    
+      $("#phoneNumber").intlTelInput({
+    	allowExtensions: false,
+          //autoFormat: false,
+          //autoHideDialCode: false,
+          //autoPlaceholder: false,
+          //defaultCountry: "auto",
+           /* geoIpLookup: function(callback) {
+             $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+               var countryCode = (resp && resp.country) ? resp.country : "";
+               callback(countryCode);
+               //alert(countryCode);
+             });
+          },  */
+          nationalMode: false,
+          numberType: "MOBILE",
+          //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+          //preferredCountries: ['cn', 'jp'],
+          utilsScript: "PhonePlugin/lib/libphonenumber/build/utils.js"
+      });
+   
+
+       function validateFirstName() 
+       {
+       var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+       var fname = document.myform.Name.value;
+      
+       // validation for first name   
+       if( fname == "" )
+         {
+          document.getElementById("errorBox_firstname").innerHTML = "Enter First Name";
+          return false;
+         }
+      
+       else if(fname.length < 3 || fname.length > 50 )
+         {
+          document.getElementById("errorBox_firstname").innerHTML = "First Name must contain 3 to 50 characters";
+          return false;
+         }
+       
+         else
+           {
+            document.getElementById("errorBox_firstname").innerHTML = "";
+            //.style.display='none';
+             
+           }
+       return true;
+
+        }
+
+      function validateLastName() 
+        {
+      
+       var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+       var lname = document.myform.LastName.value;
+        
+       if( lname == "" )
+        {
+          document.getElementById("errorBox_lastname").innerHTML = "Enter Last Name";
+          return false;
+        }
+       
+        else if(lname.length < 2 || lname.length > 50 )
+        {
+          document.getElementById("errorBox_lastname").innerHTML = "Last Name must contain 2 to 50 characters";
+          return false;
+        }
+    
+       else
+          {
+           document.getElementById("errorBox_lastname").innerHTML = "";
+          }
+       return true;
+       }
+
+          function validateEmailId() 
+    {
+        var femail = document.myform.Email.value;
+        var emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (femail == "" )
+          {
+              document.getElementById("errorBox_email_id").innerHTML = "Enter Email ID";
+            return false;
+          }
+          else if(!emailRegex.test(femail))
+          {
+            document.getElementById("errorBox_email_id").innerHTML = "Enter Valid Email ID";
+            return false;
+          }
+          else
+        {
+            document.getElementById("errorBox_email_id").innerHTML = "Loading...";
+            $.post('http://in.shikshainfotech.com/FixIT/houseowner_email_exist.php' , {'email' :  femail}, function(data) {
+             
+               if(data=="exist")
+               {
+                // alert("hurreee");
+              // $(errorBox_email_id).html("Email Id Already Exist");
+                document.getElementById("errorBox_email_id").innerHTML="Email Id Already Exist";
+                  return false;
+               }
+               else
+               {
+                 document.getElementById("errorBox_email_id").innerHTML = "";
+               }
+       
+           });
+           
+          
+        }
+       
+       return true;
+    }
+
+          function validatePhoneNumber() 
+          {
+          	 var fphoneno = document.myform.phoneno.value;
+               var stripped = fphoneno.replace(/[\.\@\!\#\$\%\^\&\*\=\_\|\ ]/g, '');
+               //alert("stripped" + stripped);
+          	 if(fphoneno == "")
+          	   {
+      		    	    document.getElementById("errorBox_phoneno").innerHTML = "Enter Mobile Number";
+      		    	    return false;
+      		   }
+          	 /* else if(!regex.test(fphoneno))
+          	   {
+          		 document.myform.Password.focus();
+      	    	   //alert("Enter Phone Number");
+      	    	   document.getElementById("errorBox_phoneno").innerHTML = "Enter Valid  Mobile Number";
+      	    	   return false;
+          	   } */
+          	  
+          	  else if (isNaN(parseInt(stripped)))
+          	   {	
+          		  	  // alert("stripped : " + stripped);
+      	    		   document.getElementById("errorBox_phoneno").innerHTML = "Enter valid phone number";
+      	    	       return false;
+          	    } 
+          	  else if (!(stripped.length > 10 && stripped.length < 15 ))
+          	    {
+          		 		//alert("size is: " + stripped.length) 
+          		  		//alert(!(fphoneno.length > 12 && fphoneno.length < 17 ));
+      	    	    	document.getElementById("errorBox_phoneno").innerHTML= "Enter valid phone number";
+      	    	        return false;
+          	    }
+          	     
+          	 else
+      			{
+
+      		 		   document.getElementById("errorBox_phoneno").innerHTML = "";
+      		 		  
+      			}
+          	 return true;
+          }
+         /*  function validatecountry()
+          {
+          	var list1 = document.getElementById('countries');
+              var country = list1.options[list1.selectedIndex].value;
+              if(country =="")
+              {
+              	  document.getElementById("errorBox_country").innerHTML="Select Country";
+               	  return false;
+              }
+              else
+              {
+              	 document.getElementById("errorBox_country").innerHTML = "";
+              }
+              return true;
+          } 
+          	  function validateAddress()
+          	  {
+          		  var address= document.myform.address.value;
+          		  var regex=/^[a-z0-9]+$/i;
+          		  if(address == "")
+          		  {
+          			  //document.myform.address.focus();
+          			  document.getElementById("errorBox_address").innerHTML = "Enter Your Address";
+          			  return false;
+          		  }
+          		  else if(address.length < 10 || address.length > 255)
+          		  {
+          			  document.getElementById("errorBox_address").innerHTML = "Address must contain 10 to 255 characters ";
+          			  return false;
+          		  }
+          		 /*  else if(!regex.test(address))
+          		  {
+          			  document.getElementById("errorBox_address").innerHTML = "Enter Valid Address.";
+          			  return false;
+          		  } 
+          		  else
+          		  {
+          			  document.getElementById("errorBox_address").innerHTML = "";
+          		  }
+          		  return true;
+          		  
+          		  
+          	  }
+          	 function validatecity()
+       	  {
+       		  var city = document.myform.city.value;
+       		  if(city == "")
+       		  {
+       			  document.myform.city.focus();
+       			  document.getElementById("errorBox_city").innerHTML = "Enter city";
+       			  return false;
+       		  }
+       		  else
+       		  {
+       			  document.getElementById("errorBox_city").innerHTML = " ";
+       		  }
+       		  return true;
+       	  } */
+        $("#continue").click(function()
+        {
+        	 var payment_mode =  document.getElementsByName('radio');
+             var mode;
+             for (var i = 0; i < payment_mode.length;i++) 
+             {    
+                if (payment_mode[i].checked) 
+                {   
+                   mode= payment_mode[i].value;
+                }
+            }
+            //alert("mode :"+mode); 
+             if(!mode)
+               {
+                
+              document.getElementById("errorBox_paymentmode").innerHTML = "Select payment type";
+               return false;
+               }
+             else
+              {
+                document.getElementById("errorBox_paymentmode").innerHTML = "";
+              }
+             var fname = document.myform.Name.value;
+             var lname = document.myform.LastName.value;
+             var email = document.myform.Email.value;
+             var phoneno = document.myform.phoneno.value;
+             var list1 = document.getElementById('countries');
+             /* var country = list1.options[list1.selectedIndex].value;
+             var address= document.myform.address.value;
+             var city = document.myform.city.value;
+             var list = document.getElementById('states');
+             var state = list.options[list.selectedIndex].value; */
+          if(validateFirstName() && validateLastName() && validateEmailId() && validatePhoneNumber())
+     	  { 
+     		  if(fname!='' && lname!='' && email!='' && phoneno!='')
+     	    	{
+     		//alert("i am in");	
+          // alert("mode is : "+ mode);
+           sessionStorage.setItem('FirstName',fname);
+           sessionStorage.setItem('LastName',lname);
+           sessionStorage.setItem('Email',email);
+           sessionStorage.setItem('PhoneNo',phoneno);
+           /* sessionStorage.setItem('country',country);
+           sessionStorage.setItem('address',address);
+           sessionStorage.setItem('city',city);
+           sessionStorage.setItem('state',state); */
+           sessionStorage.setItem('Payment_Type',mode);
+           
+           //alert('firstName='+fname+'&lastName='+lname+'&email='+email+'&phone='+phoneno+'&countries='+country +'&address='+address+'&city='+city+'&state='+state);
+                  
+
+             window.location="slide15.html";
+     	    	}
+     	  }
+        });
+      </script> 
+    
+    
+  </body>
+</html>

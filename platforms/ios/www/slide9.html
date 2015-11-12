@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 6</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/simplegallery.demo1.min.css">
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script src="js/back_button_disable.js"></script>
+    <script type="text/javascript" src="./js/simplegallery.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+            $('#gallery').simplegallery({
+                galltime : 400,
+                gallcontent: '.content',
+                gallthumbnail: '.thumbnail',
+                gallthumb: '.thumb'
+            });
+        });
+        
+    </script>
+  </head>
+  <body onload="fixitInProgress();">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- <div class="container"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-xs-8 col-sm-8 text-right" style="color:#fff;padding-top: 10px; float-right"><h4>Fix In Progress</h4></div>
+            <div class="col-xs-4 col-sm-4  navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="settings_button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+
+            </div> 
+    </nav>
+
+    <section style="margin-top:65px;color:#000">
+    <p id="populate_item">Please Wait<img alt="" src="img/thinking_loader.gif"></p>
+      <form>
+      <div class="container">
+          <div class="form-group" id="deviceready">
+          <p class="event listening"></p>
+						<p class="event received"></p>
+              <p><strong>Your Provider-in-Armor</strong></p>
+          </div> 
+          <div class="form-group" id="profile-image">
+         
+        </div> 
+          
+      </div>
+    
+          <div id="FixInProgress">
+              <h4>The Problem</h4>
+              <div class="container" id="home_issue">
+                 
+              </div>
+              <div class="box-shadow-bottom"></div>
+          </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button" style="border-bottom:1px solid #efefef;">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-new" role="button" id="job_fixed">Job Fixed!</button>
+              </div> 
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button" style="border-bottom:1px solid #efefef;">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-new" role="button" id="job_not_fixed">Job Not Fixed</button>
+              </div> 
+            </div>
+             <div class="" role="group" aria-label="group button">
+              <div class="" role="group">
+                  <!--<input type="button" onclick="goToLocation();" class="btn" value="Track Location"/>-->
+                  <button type="button" class="" role="button" id="get_location" style="width:100%;padding:15px; background:#000;color:#fff;">Track Location</button>
+              </div> 
+            </div>
+        </div>
+          
+      </form>
+    </section>
+      
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+    <script type="text/javascript">
+    function fixitInProgress()
+    {		 
+    	     $("#populate_item").show();
+    	     sessionStorage.setItem("slide","slide9");
+    		 var oid=localStorage.getItem('oid');
+    		 //alert("oid is "+ oid);
+    		 //var oid='312';
+    		 var id=0;
+    		 var profile_path="http://in.shikshainfotech.com/FixIT/uploads/serviceprovider-profile-images/";
+    		 var photos="http://in.shikshainfotech.com//FixIT/uploads/job-photos/";
+    		 var wrapper=  $("#profile-image");
+    		 var issueproblem= $("#home_issue");
+             $.ajax({
+             type: "POST",
+             url: "http://in.shikshainfotech.com/FixIT/fixinprogress.php?",
+             data:'oid='+oid,
+             success: function(data) 
+             {
+            	$("#populate_item").hide();
+            	 //alert("data is : "+ JSON.stringify(data));
+             	var JSON_pid=data[0].pid;
+             	var JSON_firstName=data[0].firstName;
+             	var JSON_lastName=data[0].lastName;
+             	var SP_name=JSON_firstName+' '+JSON_lastName;
+             	var JSON_profilePic=data[0].profilePic;
+             	var SerPro_profile=profile_path+JSON_profilePic;
+             	var JSON_charge=data[0].charge;
+             	var JSON_rating=data[0].Overall_Rating;
+             	var JSON_jid=data[0].jid;
+             	var JSON_issue=data[0].issue;
+             	var JSON_issuepics=data[0].photos;
+             	var JSON_sids=data[0].sids;
+             	var services=data[0].services;
+             	//alert("JSON_sids "+JSON_sids+" services: "+services);''
+             	
+             	sessionStorage.setItem('sp_charge',JSON_charge);
+             	sessionStorage.setItem('SP_name',SP_name);
+             	sessionStorage.setItem('JSON_profilePic',JSON_profilePic);
+             	sessionStorage.setItem('JSON_rating',JSON_rating);
+             	sessionStorage.setItem('JSON_pid',JSON_pid);
+             	sessionStorage.setItem('JSON_jid',JSON_jid);
+             	sessionStorage.setItem('JSON_sids',JSON_sids);
+             	sessionStorage.setItem('services',services);
+             	id=id+1;
+             	for(var issue_photos=1;issue_photos<=JSON_issuepics.length;issue_photos++)
+             	{
+             		 var js_strphotos=JSON.stringify(JSON_issuepics);
+  		             var js_objphotos= JSON.parse(js_strphotos);
+  		             var jsonData_profilePic = profile_path+js_objphotos[issue_photos];
+             	}
+             	var jsonData_profilePic1=photos+js_objphotos[0];
+             	var jsonData_profilePic2=photos+js_objphotos[1];
+             	var jsonData_profilePic3=photos+js_objphotos[2];
+             	$(wrapper).html('<div class="row"><div class="col-xs-4 col-sm-4"><img src="'+SerPro_profile+'" id="spimage" class="img-circle img-H-W"></div><div class="col-xs-8 col-sm-8" style="padding-right:5px;"><div><label for="name" id="spname" class="txt-orange">'+SP_name+'</label></div><div><label class="details" for="rating" id="overall'+id+'">Rating: </label></div><div><label class="details" for="quote">Range of Hourly Quote: '+JSON_charge+'</label></div></div></div>');
+                if(JSON_rating==0)
+                {
+                	 $("#overall"+id).append('Not Rated');
+                }
+                else
+                {
+	             	for(var jrating=1;jrating<=JSON_rating;jrating++)
+	            	{
+	                     $("#overall"+id).append('<span id="starRate" class="glyphicon glyphicon-star"></span>');
+	             	}
+             	
+                }
+             	$(issueproblem).html('<div class="row"><div class="col-xs-4 col-sm-4"><div id="gallery" class="simplegallery"><div class="content"><img src="'+jsonData_profilePic1+'" class="image_1" alt="" /><img src="'+jsonData_profilePic2+'" class="image_2" style="display:none" alt="" /></div><div class="clear"></div><div class="thumbnail"><div class="thumb"><a href="#" rel="1"><img src="'+jsonData_profilePic3+'" id="thumb_1" alt="" /></a></div><div class="thumb"><a href="#" rel="2"><img src="'+jsonData_profilePic3+'" id="thumb_2" alt="" /></a></div></div></div></div><div class="col-xs-8 col-sm-8"><label>Description:</label><p>'+JSON_issue+'</p></div></div>');
+             },
+             error:function(jqXHR, textStatus, errorThrown) {
+					//alert('Error' + errorThrown + textStatus + jqXHR);
+					//window.location="slide4.html";
+				}
+             });
+    }
+    </script>
+    
+    <script type="text/javascript">
+    $("#job_fixed").click( function()
+            {
+    	      //window.location="slide10.html";
+    			 var pid=sessionStorage.getItem('JSON_pid');
+     			 var jid=sessionStorage.getItem('JSON_jid');
+    		     $.ajax({
+	             type: "POST",
+	             url: "http://in.shikshainfotech.com/FixIT/jobfixed.php?",
+	             data:'pid='+ pid +'&jid='+jid,
+	             success: function (data) 
+	             {
+	            	// alert("data is : "+ data);
+	            	 window.location="pay_amount.html";
+	             }
+	    	 	 }); 
+    			
+            	
+            }
+         );
+    
+    $("#job_not_fixed").click(function()
+    		{
+    			window.location="slide30.html";
+                              });
+    //track_location		
+    
+    		
+     $("#settings_button").click(function()
+    		{
+    			window.location="slide28.html";
+                                 });
+                                 
+     
+     $("#get_location").click(function(){
+                              window.location = "slide8.html";
+                              });
+    		
+    </script>
+
+  </body>
+</html>

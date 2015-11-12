@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 31</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="PhonePlugin/build/css/intlTelInput.css">
+	<link rel="stylesheet" href="PhonePlugin/build/css/demo.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   <!--  <style>
+    select {  -webkit-appearance: listbox;
+			}
+			select {
+			    width: 100%;
+			    height: 40px;
+			    line-height:40px;
+			    border: 1px solid #999;
+			    border-radius: 6px;
+			    margin-bottom:10px;
+			}
+    </style> -->
+  </head>
+  <body onload="get_edit_profile();">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- <div class="container"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-xs-12 col-sm-12 text-center" style="color:#fff;padding-top: 10px; float-right"><h4>Fixit</h4></div>
+           <!--  <div class="col-xs-4 col-sm-4  navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" id="settings_button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Start Bootstrap</a>
+
+            </div>  -->
+         
+    </nav>
+
+
+    <section style="margin-top:75px;color:#000;padding-bottom:75px;" id="slide30">
+      <form name="form31" id="form31">
+      <div class="container" id="MarginBottom">
+          <div class="form-group" id="profile-image">
+              
+                <!-- <div class="col-xs-4 col-sm-4">
+                     <div id="imagePreview" class="img-circle img-H-W"
+                     ></div>
+                </div> -->
+                  <div class="row">
+           <!--  <div class="row"> -->
+                 <div class="col-xs-4 col-sm-4" id="imagediv">
+                                  <div id="imagePreview" class="img-circle img-H-W"  
+									data-toggle="modal" data-target="#myModal" style="width:50px; height:50px;"></div>
+                               </div>
+             <!--    <div class="uplload-button">
+                <div id="deviceready">
+                
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+                  <input type="file" id="selectedFile"
+                    name="selectedFile" style="display: none;" />
+                </div>
+               
+              </div> -->  
+              <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content text-center">
+                    <div class="ModelTopBorder"><h4 style="background-color: #ccc;margin: 0px;padding: 10px 0px;">Complete Action Using</h4></div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                          <div class="col-sm-6 col-xs-6" >
+                            <div class="text-center" id="camera_option">
+                              <div><i class="fa fa-camera fa-5x"></i></div>
+                              <div><label>Camera</label></div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-xs-6">
+                            <div class="text-center" id="gallery_option">
+                              <div><i class="fa fa-picture-o fa-5x"></i></div>
+                              <div id="deviceready">                
+                                  <p class="event listening" style="display: none;"></p>
+                                  <p class="event received" style="display: none;"></p>
+                              </div>
+                              <div><label>Gallery</label></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>                      
+                    <div class="modal-footer" id="ModalButton">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default" role="button" data-dismiss="modal" style="padding:2px 0;">CANCEL</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>                 
+           <!--  </div> -->
+           
+                <div class="uplload-button">
+                <div id="deviceready">
+                
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+                  <input type="file" id="selectedFile"
+                    name="selectedFile" style="display: none;" />
+                </div>
+                <!-- <input type="button" id="uploadFile" value="Browse"  class="img"/>-->
+              </div>   
+                <div class="col-xs-8 col-sm-8">
+                    <div class="row" id="name">
+                        <div class="col-sm-12 col-md-12 col-xs-12"><input type="text" class="form-control" id="firstname" placeholder="First name" value="" name="FirstName"
+                          onkeyup="this.value=this.value.replace(/[^A-Za-z]/g,'');"
+                          onchange="return validateFirstName();"disabled>
+                          <div id="errorBox_firstname" class="alertField"></div>
+                          </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12"><input type="text" class="form-control" id="lastname" placeholder="Last Name" value="" name="LastName" onkeyup="this.value=this.value.replace(/[^A-Za-z]/g,'');" onchange="return validateLastName();" disabled>
+                          <div id="errorBox_lastname" class="alertField"></div>
+                        </div>
+                    </div>
+                </div>            
+              </div>
+              <div class="form-group">
+                <label for="email1">Email address</label>
+                <input type="email" class="form-control small-screen-input" id="emailid" id=" small-screen-input" name="EmailId" value="" onchange="return validateEmailId();" disabled>
+                <div id="errorBox_email_id" class="alertField"></div>
+
+              </div>
+              <div class="form-group">
+                <label for="phone">Password</label>
+                <input type="password" class="form-control small-screen-input" id="password"  id="small-screen-input" value="" disabled>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phoneNumber" name="PhoneNo" value="" onblur="return validatePhoneNumber();" disabled>
+                <div id="errorBox_phoneno" class="alertField"></div>
+              </div>
+              <div class="form-group">
+					<label for="exampleInputPassword1">Countries</label> 
+						<select id="countries" name="country" class="form-control"  onchange="return validatecountry();" disabled>
+							
+							</select>
+						<div id="errorBox_country" class="alertField"></div>
+				</div> 
+				<div class="form-group">
+					<label for="exampleInputEmail1">Address</label> <input
+						type="text" name="address" class="form-control" id="address" value=""
+						onchange="return validateAddress();" disabled>
+
+					<div id="errorBox_address" class="alertField"></div>
+				</div>
+				<br/>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputEmail1">City
+							</label> <input type="text"
+								name="city" class="form-control" id="city" value="" disabled>
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputPassword1">State</label> <select
+								name="state" id="states" class="form-control" disabled>
+								
+							</select>
+						</div>
+					</div>
+					<div id="errorBox_city" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Zip Code</label>
+					  <input type="number" name="zcode" class="form-control" id="zipcode" value="" onkeypress="if(this.value.length>5){this.value='this.value';}"  onblur="return validateZipcode();" disabled>
+					<div id="errorBox_Zipcode" class="alertField"></div>
+				</div>
+              
+        </div>        
+      </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button" >
+        
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group" >
+              
+                <button type="button" class="btn btn-default btn-hover-green" role="button" id="edit" style="border-right:1px solid #ccc;">Edit</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" id="save" class="btn btn-default btn-hover-green" data-action="save" role="button" >Save</button>
+              </div> 
+            </div>
+            
+        </div>
+          
+      </form>
+    </section>
+    <!-- --------------Modal POPUP starts-------------   -->
+    
+    <div class="modal fade" id="success">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="ModelTopBorder text-center">
+                    <h4 style="background-color: #ccc;margin: 0px;padding: 25px 0px;">Title</h4>
+                </div>
+                
+                <div class="modal-footer" id="ModalButton">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default ok-btn" role="button" data-dismiss="modal">ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+    
+    <!-----------------Modal Popup Ends-------------------->
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="http://code.ionicframework.com/1.0.1/js/ionic.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/internet_connection.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+
+    <script type="text/javascript">
+
+
+        function fillpage()
+        {
+
+            var imageURL = "http://in.shikshainfotech.com/FixIT/uploads/houseowner-profile-images/";
+            var new_email = sessionStorage.getItem('new_email');
+            var new_fname = sessionStorage.getItem('new_fname');
+            var new_lname = sessionStorage.getItem('new_lname');
+            var new_phone = sessionStorage.getItem('new_phone');
+            var new_password = sessionStorage.getItem('new_password');
+            var new_countries=sessionStorage.getItem('new_countries');
+	        var new_address=sessionStorage.getItem('new_address');
+	        var new_city=sessionStorage.getItem('new_city');
+	        var new_states=sessionStorage.getItem('new_states');
+	        var new_zipcode=sessionStorage.getItem('new_zipcode');
+            if(new_email==null)
+            {
+               var emailid = localStorage.getItem('email');
+               $("#emailid").val(emailid);
+            }
+            else 
+            {
+               $("#emailid").val(new_email);
+            }
+            if(new_fname==null)
+            {
+               var firstname = localStorage.getItem('firstname');
+               $("#firstname").val(firstname);
+            }
+            else 
+            {
+               $("#firstname").val(new_fname);
+            }
+            if(new_phone==null)
+            {
+               var phoneNumber = sessionStorage.getItem('phone');
+               $("#phoneNumber").val(phoneNumber);
+            }
+            else 
+            {
+               $("#phoneNumber").val(new_phone);
+            }
+            if(new_password==null)
+            {
+               var password = localStorage.getItem('$password');
+               $("#password").val(password);
+            }
+            else 
+            {
+               $("#password").val(new_password);
+            }
+            if(new_lname==null)
+            {
+               var lastname = localStorage.getItem('lastname');
+               alert("if last name"+lastname);
+               $("#lastname").val(lastname);
+            }
+            else 
+            {
+                lert("else last name"+lastname);
+               $("#lastname").val(new_lname);
+            }
+            if(new_countries==null)
+            {
+               var countries = sessionStorage.getItem('countries');
+               $("#countries").val(countries);
+            }
+            else 
+            {
+               $("#countries").val(new_countries);
+            }
+            
+            if(new_address==null)
+            {
+               var address = sessionStorage.getItem('address');
+               $("#address").val(address);
+            }
+            else 
+            {
+               $("#address").val(new_address);
+            }
+			
+            if(new_city==null)
+            {
+               var city = sessionStorage.getItem('city');
+               $("#city").val(city);
+            }
+            else 
+            {
+               $("#city").val(new_city);
+            }
+            
+            if(states==null)
+            {
+               var states = sessionStorage.getItem('state');
+               $("#states").val(states);
+            }
+            else 
+            {
+               $("#states").val(new_states);
+            }
+            if(zipcode==null)
+            {
+               var zipcode = sessionStorage.getItem('zipcode');
+               $("#zipcode").val(zipcode);
+            }
+            else 
+            {
+               $("#zipcode").val(new_zipcode);
+            }
+            
+            
+            var profileImage = sessionStorage.getItem('homeownerimage');
+            //alert(" profileImage "+profileImage);
+            sessionStorage.setItem('homeowner_profilepic', profileImage);
+            var image=imageURL+profileImage;
+           // alert(image); 
+               function escapeShellArgs (cmd) {
+                return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+              }
+            $("#imagePreview").css("background-image", "url("+escapeShellArgs(image)+")");
+   
+
+        }
+        function googledata()
+        {
+           var imageURL = "http://in.shikshainfotech.com/FixIT/uploads/houseowner-profile-images/";
+           var new_email = sessionStorage.getItem('new_email');
+           var new_fname = sessionStorage.getItem('new_fname');
+           var new_lname = sessionStorage.getItem('new_lname');
+           var new_phone = sessionStorage.getItem('new_phone');
+           var new_password = sessionStorage.getItem('new_password');
+           var new_countries=sessionStorage.getItem('new_countries');
+           var new_address=sessionStorage.getItem('new_address');
+           var new_city=sessionStorage.getItem('new_city');
+           var new_states=sessionStorage.getItem('new_states');
+           var new_zipcode=sessionStorage.getItem('new_zipcode');
+     
+           if(new_fname==null)
+           {
+              var firstname = localStorage.getItem('gmailname');
+              $("#firstname").val(firstname);
+           }
+           else 
+           {
+              $("#firstname").val(new_fname);
+           }
+           
+           if(new_lname==null)
+           {
+              var lastname = localStorage.getItem('lastname');
+              $("#lastname").val(lastname);
+           }
+           else 
+           {
+              $("#lastname").val(new_lname);
+           }
+          
+            $("#emailid").val(new_email);
+            $("#phoneNumber").val(new_phone);
+            $("#password").val(new_password);
+            $("#countries").val(new_countries);
+            $("#address").val(new_address);
+            $("#city").val(new_city);
+            $("#states").val(new_states);
+            $("#zipcode").val(new_zipcode);
+           var profileImage = localStorage.getItem('image');
+           sessionStorage.setItem('googleplus_profilepic', profileImage);
+           var image=profileImage;
+              function escapeShellArgs (cmd) {
+               return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+             }
+           $("#imagePreview").css("background-image", "url("+escapeShellArgs(image)+")");
+  } 
+  function facebookdata()
+        {
+         var imageURL = "http://in.shikshainfotech.com/FixIT/uploads/houseowner-profile-images/";
+         var new_email = sessionStorage.getItem('new_email');
+         var new_fname = sessionStorage.getItem('new_fname');
+         var new_lname = sessionStorage.getItem('new_lname');
+         var new_phone = sessionStorage.getItem('new_phone');
+         var new_password = sessionStorage.getItem('new_password');
+         var new_countries=sessionStorage.getItem('new_countries');
+         var new_address=sessionStorage.getItem('new_address');
+         var new_city=sessionStorage.getItem('new_city');
+         var states=sessionStorage.getItem('new_states');
+         var zipcode=sessionStorage.getItem('new_zipcode');
+          
+           if(new_fname==null)
+           {
+              var firstname = localStorage.getItem('fbname');
+              $("#firstname").val(firstname);
+           }
+           else 
+           {
+              $("#firstname").val(new_fname);
+           }
+          
+           if(new_lname==null)
+           {
+              var lastname = localStorage.getItem('lastname');
+              $("#lastname").val(lastname);
+           }
+           else 
+           {
+              $("#lastname").val(new_lname);
+           }
+          
+            $("#emailid").val(new_email);
+            $("#password").val(new_password);
+            $("#phoneNumber").val(new_phone);
+            $("#countries").val(new_countries);
+            $("#states").val(states);
+            $("#city").val(new_city);
+            $("#address").val(new_address);
+            $("#zipcode").val(zipcode);
+           var profileImage = localStorage.getItem('image');
+           sessionStorage.setItem('facebook_profilepic', profileImage);
+           var image=profileImage;
+              function escapeShellArgs (cmd) {
+               return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+             }
+           $("#imagePreview").css("background-image", "url("+escapeShellArgs(image)+")");
+  } 
+  function get_edit_profile()
+  {
+    var edit_profile=localStorage.getItem("edit_profile");
+    //alert("edit_profile "+ edit_profile);
+    if (edit_profile==1) {
+
+       fillpage();
+    }
+    else if(edit_profile==2){
+     googledata();
+
+    }
+    else if (edit_profile==3) {
+       facebookdata();
+
+    }
+  }
+
+        function enableFields()
+        {
+/*
+            document.getElementById("email").disabled=true;
+            document.getElementById("pwd").disabled=true;
+            document.getElementById("check1").disabled=true;*/
+            $("#emailid").removeAttr('disabled');
+            $("#phoneNumber").removeAttr('disabled');
+            $("#password").removeAttr('disabled');
+            $("#lastname").removeAttr('disabled');
+            $("#firstname").removeAttr('disabled');
+            $("#countries").removeAttr('disabled');
+            $("#address").removeAttr('disabled');
+            $("#city").removeAttr('disabled');
+            $("#states").removeAttr('disabled');
+            $("#zipcode").removeAttr('disabled');
+        }
+
+   function validateFirstName() 
+    {
+      
+     var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+     var fname=document.getElementById('firstname').value;
+     if( fname == "" )
+     {
+	     document.FirstName.FirstName.focus() ;
+	     document.getElementById("errorBox_firstname").innerHTML = "Enter first name";
+	     return false;
+     }
+    else if(fname.length < 3 || fname.length > 51 )
+     {
+          document.FirstName.FirstName.focus() ;
+         document.getElementById("errorBox_firstname").innerHTML = "First name must contain 3 to 50 character";
+         return false;
+     }
+    else if(!regx.test(fname))
+     {
+         document.FirstName.FirstName.focus() ;
+         document.getElementById("errorBox_firstname").innerHTML = "First name must contains character only.";
+         return false;
+     }
+   else
+     {
+         document.getElementById("errorBox_firstname").innerHTML="" ;
+     }
+       return true;
+
+    }
+    function validateLastName() 
+    {
+         var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+         var lname=document.getElementById('lastname').value;
+     if( lname == "" )
+       {
+	      document.form31.LastName.focus();
+	      document.getElementById("errorBox_lastname").innerHTML = "Enter Last name";
+	      return false;
+       }
+     else if(lname.length < 2 || lname.length > 51 )
+       {
+           document.form31.LastName.focus();
+           document.getElementById("errorBox_lastname").innerHTML = "Last name must contain 2 to 50 character";
+           return false;
+       }
+     else if(!regx.test(lname))
+       {
+           document.form31.LastName.focus();
+           document.getElementById("errorBox_lastname").innerHTML = "Last name must contains character only.";
+           return false;
+       }
+     
+     else
+       {
+       
+           document.getElementById("errorBox_lastname").innerHTML=""  ;
+       }
+         return true;
+    }
+
+        //validate Email id
+    function validateEmailId() 
+    {
+       var email=document.getElementById('emailid').value;
+       var emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+      
+       if (email == "" )
+          {
+              document.form31.EmailId.focus();
+              document.getElementById("errorBox_email_id").innerHTML = "Enter Email Address";
+              return false;
+          }
+       else if(!emailRegex.test(email))
+          {
+              document.form31.EmailId.focus();
+              document.getElementById("errorBox_email_id").innerHTML = "Enter  Valid Email Address";
+              return false;
+          }
+      
+       return true;
+    }
+
+            //Validate Phone number 
+    function validatePhoneNumber() 
+    {
+       var phone=document.getElementById('phoneNumber').value;
+       var stripped = phone.replace(/[\.\@\!\#\$\%\^\&\*\=\|\ ]/g, '');
+       var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+      if(phone == "")
+      {
+             document.form31.PhoneNo.focus();
+             document.getElementById("errorBox_phoneno").innerHTML = "Enter Mobile number";
+             return false;
+       }
+    
+      else if (isNaN(parseInt(stripped)))
+       {
+            document.getElementById("errorBox_phoneno").innerHTML = "The phone number contains illegal characters.Don't include dash (-)\n";
+            return false;
+       } 
+     else if (!(stripped.length >= 10 && stripped.length < 14  )) 
+      {
+               document.getElementById("errorBox_phoneno").innerHTML= "Enter correct phone number";
+               return false;
+      }
+      else
+      {
+           document.getElementById("errorBox_phoneno").innerHTML="" ;
+          
+      }
+       return true;
+    }
+    function validatecountry()
+    {
+    	var list1 = document.getElementById('countries');
+        var country = list1.options[list1.selectedIndex].value;
+        if(country =="")
+        {
+        	  document.getElementById("errorBox_country").innerHTML="Select Country";
+         	  return false;
+        }
+        else
+        {
+        	 document.getElementById("errorBox_country").innerHTML = "";
+        }
+        return true;
+    } 
+    function validateAddress()
+    {
+    		  var address= document.myform.address.value;
+    		  var regex=/^[a-z0-9]+$/i;
+    		  if(address == "")
+    		  {
+    			  //document.myform.address.focus();
+    			  document.getElementById("errorBox_address").innerHTML = "Enter Your Address";
+    			  return false;
+    		  }
+    		  else if(address.length < 10 || address.length > 255)
+    		  {
+    			  document.getElementById("errorBox_address").innerHTML = "Address must contain 10 to 255 characters ";
+    			  return false;
+    		  }
+    		 /*  else if(!regex.test(address))
+    		  {
+    			  document.getElementById("errorBox_address").innerHTML = "Enter Valid Address.";
+    			  return false;
+    		  } */
+    		  else
+    		  {
+    			  document.getElementById("errorBox_address").innerHTML = "";
+    		  }
+    		  return true;
+    		  
+    		  
+    	  }
+    	  function validatecity()
+    	  {
+    		  var city = document.myform.city.value;
+    		  if(city == "")
+    		  {
+    			  document.myform.city.focus();
+    			  document.getElementById("errorBox_city").innerHTML = "Enter city";
+    			  return false;
+    		  }
+    		  else
+    		  {
+    			  document.getElementById("errorBox_city").innerHTML = " ";
+    		  }
+    		  return true;
+    	  }
+    	  function validateZipcode() 
+    	    {
+    			var zipcode=document.myform.zcode.value;
+    			var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    		    
+    			  if(zipcode.length < 5 || zipcode.length > 6)
+    			  {
+    				document.getElementById("errorBox_Zipcode").innerHTML = "Enter valid  Zipcode";
+    			    return false; 
+    			  }
+    			  else if(zipcode =="")
+    			  {
+    				  document.getElementById("errorBox_Zipcode").innerHTML = "Enter Zipcode";
+    				   return false; 
+    			  }
+    			 else
+    			  {
+    				document.getElementById("errorBox_Zipcode").innerHTML = "";
+    			  }
+    			
+    		  	return true;
+    		}
+    		
+   	 	  
+        $("#edit").click(function(){
+            
+            enableFields();
+
+        });
+
+        $("#save").click(function(){
+
+           var oid=localStorage.getItem('oid');
+           var email=document.getElementById('emailid').value;
+           var fname=document.getElementById('firstname').value;
+           var lname=document.getElementById('lastname').value;
+           var phone=document.getElementById('phoneNumber').value;
+           var password=document.getElementById('password').value;
+           var countries=document.getElementById('countries').value;
+           var address=document.getElementById('address').value;
+           var city=document.getElementById('city').value;
+           var states=document.getElementById('states').value;
+           var zipcode=document.getElementById('zipcode').value;  
+           	  sessionStorage.setItem('new_email',email);
+	          sessionStorage.setItem('new_fname',fname);
+	          sessionStorage.setItem('new_lname',lname);
+	          sessionStorage.setItem('new_phone',phone);
+	          sessionStorage.setItem('new_password',password);
+	          sessionStorage.setItem('new_countries',countries);
+	          sessionStorage.setItem('new_address',address);
+	          sessionStorage.setItem('new_city',city);
+	          sessionStorage.setItem('new_states',states);
+	          sessionStorage.setItem('new_zipcode',zipcode);
+	          //alert('oid='+oid+'&fname='+fname+'&lname='+lname+'&email='+email+'&phone='+phone+'&password='+password+'&countries='+countries+'&address='+address+'&city='+city+'&states='+states+'&zipcode='+zipcode);
+            $.ajax({    //create an ajax request to load_page.php
+            type: "POST",
+            url: "http://in.shikshainfotech.com/FixIT/houseownerprofileupdate.php?",  
+            data:'oid='+oid+'&fname='+fname+'&lname='+lname+'&email='+email+'&phone='+phone+'&password='+password+'&countries='+countries+'&address='+address+'&city='+city+'&states='+states+'&zipcode='+zipcode,    
+            success: function(response){                    
+ 
+                var json_arr=JSON.stringify(response);
+                var obj = JSON.parse(json_arr);
+                                  
+                   if(obj.status=='fail')
+                   {
+                   status = 0;
+                   $("#success h4").text("Not Saved");
+                   $("#success").modal('show');
+                   }
+                   else
+                   {
+                   status = 1;
+                   $("#success h4").text("Saved Successfully");
+                   $("#success").modal('show');
+                   // window.location = "slide2.html";
+                   }
+                   
+                   
+                /* if(obj[0].firstName==undefined)
+                 
+                 
+                 
+                {
+                  document.getElementById("errorBox_alertdata").innerHTML = json_arr;
+                  return false;
+                }
+                else
+                {
+                 for(var i=0; i<obj.length; i++)
+                  {
+                  sessionStorage.setItem('oid', obj[0].oid);
+                  sessionStorage.setItem('firstname', obj[0].firstName);
+                  sessionStorage.setItem('lastname', obj[0].lastName);
+                  sessionStorage.setItem('phone', obj[0].phone);
+                  //sessionStorage.setItem('homeowner_profilepic', obj[0].profilepic);
+                  //alert(obj[0].profilepic);
+                  alert("Successfully Modified.");
+                  //alert("firstname is : " + data[0].firstName);
+                  window.location = "slide2.html";
+                  }
+                } */
+           }
+
+        });
+
+        });
+
+            $("#settings_button").click( function()
+               {
+                             
+               window.location="slide28.html";
+               }
+            );
+
+            $("#camera_option").click(function(){
+             
+            $('#myModal').modal('hide');
+            capturePhoto();
+
+      });
+
+           $("#gallery_option").click(function(){
+
+           $('#myModal').modal('hide');
+           openFileBrowser1();
+          
+      });
+        function openFileBrowser1(imag){
+                sessionStorage.setItem('ImageId',imag);
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    correctOrientation: true,
+                    targetWidth: 50,
+                    targetHeight: 50
+            });
+        }
+                                         
+                                         
+           function openFileBrowser(){
+               
+               // alert("open file browser4 called...");
+                var deviceInformation = ionic.Platform.version();//fetch the device operating system
+                var currentPlatform = ionic.Platform.platform(); //fetch the device OS version
+               
+                    var app = {
+                          // Application Constructor
+                          initialize: function() {
+                              this.bindEvents();
+                          },
+                          // Bind Event Listeners
+                          //
+                          // Bind any events that are required on startup. Common events are:
+                          // 'load', 'deviceready', 'offline', and 'online'.
+                          bindEvents: function() {
+                              document.addEventListener('deviceready', this.onDeviceReady, false);
+                          },
+                          
+                          onDeviceReady: function() {
+                              app.receivedEvent('deviceready');
+                          },
+                          // Update DOM on a Received Event
+                          receivedEvent: function(id) {
+                              var parentElement = document.getElementById(id);
+                              var listeningElement = parentElement.querySelector('.listening');
+                              var receivedElement = parentElement.querySelector('.received');
+
+                              listeningElement.setAttribute('style', 'display:none;');
+                              receivedElement.setAttribute('style', 'display:block;');
+
+                              console.log('Received Event: ' + id);
+                              
+                    function escapeShellArg (cmd) {
+                        return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+                    }
+
+                              var success = function(data) {
+                                console.log( data.filepath );
+                                var fileURL= data.filepath;
+
+                               
+                     $("#imagePreview").css("background-image", "url("+escapeShellArg(fileURL)+")");
+         
+                                var win = function (r) {
+
+                                    
+                                    console.log("Code = " + r.responseCode);
+                                    console.log("Response = " + r.response);
+                                    console.log("Sent = " + r.bytesSent);
+                                   
+                                    var serverpath=JSON.parse(r.response); 
+
+                                    //alert("Server path : "+serverpath.path);
+                                    //alert("Response :"+r.response);
+                                    //alert("Server path : "+serverpath.path);
+                                   sessionStorage.setItem('homeowner_profilepic',serverpath.path);
+                                }
+
+                                var fail = function (error) {
+                                    //alert("An error has occurred: Code = " + error.code);
+                                    console.log("upload error source " + error.source);
+                                    console.log("upload error target " + error.target);
+                                }
+
+                                var oid = sessionStorage.getItem('owner');
+                             //   alert("OID :"+oid);
+                                var options = new FileUploadOptions();
+                                
+                               // alert("File Upload Options Called");
+                                options.fileKey = "fileToUpload";
+                                options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+                                options.mimeType = "image/jpg";
+
+                                var params = new Object();
+                                params.oid = oid;
+                                //params.value2 = "param";
+
+                                options.params = params;
+                                 
+                                var ft = new FileTransfer();
+                                ft.upload(fileURL, encodeURI("http://in.shikshainfotech.com/FixIT/houseownerphotoupload.php"), win, fail, options);
+
+                            };
+                        
+                            var error = function(msg) {
+                                console.log( msg );
+                            };
+                        
+                            filechooser.open({},success,error);
+                              
+                          }
+                      };
+
+                     app.initialize();
+              
+                }
+
+                   
+                   function onPhotoDataSuccess(imageData) {
+                     
+                      // alert("imageData "+imageData);
+                        function escapeShellArg (cmd) 
+                                {
+                        			//alert("cmd "+ cmd);
+                                    return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+                                }
+                       $("#imagePreview").css("background-image", "url("+escapeShellArg(imageData)+")");
+                       
+
+                       var win = function (r) {
+                    	   //alert("r is "+JSON.stringify(r));
+                                        console.log("Code = " + r.responseCode);
+                                        console.log("Response = " + r.response);
+                                        console.log("Sent = " + r.bytesSent);
+                                        var serverpath=JSON.parse(r.response)
+                                        sessionStorage.setItem('homeowner_profilepic',serverpath.path);
+                                    }
+
+                                    var fail = function (error) {
+                                        //alert("error is "+ error);
+                                        console.log("upload error source " + error.source);
+                                        console.log("upload error target " + error.target);
+                                    }
+                                    var oid = sessionStorage.getItem('owner');
+                                   // alert("oid is "+ oid);
+                                    var options = new FileUploadOptions();
+                                    //alert("options "+ JSON.stringify(options));
+                                    options.fileKey = "fileToUpload";
+                                    options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
+                                    options.mimeType = "image/jpg";
+                                    
+                                   /*  var params = {};
+                                    params.value1 = "test";
+                                    params.value2 = "param"; */
+                                    
+                                    var params = new Object();
+                                    params.oid = oid;
+                                    //params.value1 = "test";
+                                   // params.value2 = "param";
+                                    options.params = params; 
+                                    var ft = new FileTransfer();
+                                    ft.upload(imageData, encodeURI("http://in.shikshainfotech.com/FixIT/houseownerphotoupload.php"), win, fail, options);
+         
+                    }
+
+                   function capturePhoto() 
+                   {
+                	   var pictureSource;   // picture source
+                       var destinationType; // sets the format of returned value
+                       document.addEventListener("deviceready",onDeviceReady,false);
+                      // alert("openCameraOptions called1");
+                       function onDeviceReady()
+                       {
+                       pictureSource=navigator.camera.PictureSourceType;
+                       destinationType=navigator.camera.DestinationType;
+                       }
+
+                         navigator.camera.getPicture(onPhotoDataSuccess, onFail, { destinationType: Camera.DestinationType.FILE_URI,
+                      	    quality: 50,
+                   	    	correctOrientation: true,
+                                                     targetWidth: 50,
+                                                     targetHeight: 50
+                   	    	});
+
+                    }
+
+                    function onFail(message) {
+
+                        alert('Failed because: ' + message);
+                    }
+
+    </script>
+   <script type="text/javascript" src="js/Countries.js"></script>
+    <script type="text/javascript">
+
+    populateCountries("countries","states");
+            
+    $(".ok-btn").click(function(){
+            if(status == 1){
+                    $('#success').modal('hide');
+                    window.location = "slide2.html";
+            }
+            else if(status == 0){
+                    $('#success').modal('hide');
+            }
+            else{
+                               
+            }
+                               
+    });
+	</script>
+	<script src="PhonePlugin/build/js/intlTelInput.js"></script>
+	<script>
+    
+      $("#phoneNumber").intlTelInput({
+    	allowExtensions: false,
+          //autoFormat: false,
+          //autoHideDialCode: false,
+          //autoPlaceholder: false,
+          //defaultCountry: "auto",
+           /* geoIpLookup: function(callback) {
+             $.get('http://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+               var countryCode = (resp && resp.country) ? resp.country : "";
+               callback(countryCode);
+               //alert(countryCode);
+             });
+          },  */
+          nationalMode: false,
+          numberType: "MOBILE",
+          //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+          //preferredCountries: ['cn', 'jp'],
+          utilsScript: "PhonePlugin/lib/libphonenumber/build/utils.js"
+      });
+    </script>
+  </body>
+</html>

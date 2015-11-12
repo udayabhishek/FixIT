@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 30</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  
+        <div class="col-xs-2 col-sm-2 text-left"
+            style="color: #fff;  padding: 10px 0 0 10px  ; ">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                id="back-button-id" >
+                <i class="fa fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="col-xs-8 col-sm-8 text-center"
+            style="color: #fff; padding-top: 15px;">
+            <h4>Job Incomplete</h4>
+        </div>
+        <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+    
+        </div>
+    </nav>
+
+    <section style="margin:75px 0 75px 0;color:#000" id="slide30">
+      <form>
+      <div class="container">
+        <div class="form-group">
+          <label for="Email1">What is the problem?</label>         
+          <textarea class="form-control" id="fix" rows="3"></textarea>
+          <div id="errorBox_wecanfix" class="alertField"></div>
+        </div>
+        <div class="form-group" id="profile-image">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <label for="exampleInputEmail1">Upload a photo</label>
+            </div>
+        <!--     <div class="col-xs-12 col-sm-12">
+                <div class="row">                
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview" class="img-rounded img-responsive" onclick="$('#selectedFile').click();"></div>
+                        <div class="uplload-button">
+                            <div ><input  type="file" id="selectedFile" style="display:none;" /></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview" class="img-rounded img-responsive" onclick="$('#selectedFile').click();"></div>
+                        <div class="uplload-button">
+                            <div ><input  type="file" id="selectedFile" style="display:none;" /></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview" class="img-rounded img-responsive" onclick="$('#selectedFile').click();"></div>
+                        <div class="uplload-button">
+                            <div ><input  type="file" id="selectedFile" style="display:none;" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+           <div class="col-xs-12 col-sm-12">
+                <div class="row">   
+                
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview1" class="img-rounded img-responsive"></div>
+                           <div class="modal fade" id="imgPreview1">
+                <div class="modal-dialog">
+                  <div class="modal-content text-center">
+                    <div class="ModelTopBorder"><h4 style="background-color: #ccc;margin: 0px;padding: 10px 0px;">Complete Action Using</h4></div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                          <div class="col-sm-6 col-xs-6" >
+                            <div class="text-center" id="camera_option1">
+                              <div><i class="fa fa-camera fa-5x"></i></div>
+                              <div><label>Camera</label></div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-xs-6">
+                            <div class="text-center" id="gallery_option1">
+                              <div><i class="fa fa-picture-o fa-5x"></i></div>
+                              <div id="deviceready">                
+                                  <p class="event listening" style="display: none;"></p>
+                                  <p class="event received" style="display: none;"></p>
+                              </div>
+                              <div><label>Gallery</label></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>                      
+                    <div class="modal-footer" id="ModalButton">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-new" role="button" data-dismiss="modal">CANCEL</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+                        <div class="uplload-button">
+                              <div id="deviceready">
+                
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+                  <input type="file" id="selectedFile"
+                    name="selectedFile" style="display: none;" />
+                </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview2" class="img-rounded img-responsive"></div>
+
+                                  <div class="modal fade" id="imgPreview2">
+                <div class="modal-dialog">
+                  <div class="modal-content text-center">
+                    <div class="ModelTopBorder"><h4 style="background-color: #ccc;margin: 0px;padding: 10px 0px;">Complete Action Using</h4></div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                          <div class="col-sm-6 col-xs-6" >
+                            <div class="text-center" id="camera_option2">
+                              <div><i class="fa fa-camera fa-5x"></i></div>
+                              <div><label>Camera</label></div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-xs-6">
+                            <div class="text-center" id="gallery_option2">
+                              <div><i class="fa fa-picture-o fa-5x"></i></div>
+                              <div id="deviceready">                
+                                  <p class="event listening" style="display: none;"></p>
+                                  <p class="event received" style="display: none;"></p>
+                              </div>
+                              <div><label>Gallery</label></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>                      
+                    <div class="modal-footer" id="ModalButton">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default" role="button" data-dismiss="modal">CANCEL</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+                        <div class="uplload-button">
+                           <div id="deviceready">
+                
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+                  <input type="file" id="selectedFile"
+                    name="selectedFile" style="display: none;" />
+                </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4" id="profile-img">
+                      <div id="imagePreview3" class="img-rounded img-responsive"></div>
+                                  <div class="modal fade" id="imgPreview3">
+                <div class="modal-dialog">
+                  <div class="modal-content text-center">
+                    <div class="ModelTopBorder"><h4 style="background-color: #ccc;margin: 0px;padding: 10px 0px;">Complete Action Using</h4></div>
+                    <div class="modal-body text-center">
+                        <div class="row">
+                          <div class="col-sm-6 col-xs-6" >
+                            <div class="text-center" id="camera_option3">
+                              <div><i class="fa fa-camera fa-5x"></i></div>
+                              <div><label>Camera</label></div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-xs-6">
+                            <div class="text-center" id="gallery_option3">
+                              <div><i class="fa fa-picture-o fa-5x"></i></div>
+                              <div id="deviceready">                
+                                  <p class="event listening" style="display: none;"></p>
+                                  <p class="event received" style="display: none;"></p>
+                              </div>
+                              <div><label>Gallery</label></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>                      
+                    <div class="modal-footer" id="ModalButton">
+                      <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                          <button type="button" class="btn btn-default" role="button" data-dismiss="modal">CANCEL</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+                        <div class="uplload-button">
+                            <div id="deviceready">
+                
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+                  <input type="file" id="selectedFile"
+                    name="selectedFile" style="display: none;" />
+                </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>  
+           
+          </div>
+        </div>
+    
+        
+        <div class="form-group">
+            <label for="exampleInputEmail1">How should we contact you?</label>
+            <div id="errorBox_contact" class="alertField"></div>
+            <div class="btn-group" id="" style="width: 100%" role="group">
+                <div class="col-xs-12 col-sm-4" id="radiolabels1">
+                    <input type="radio" value="6" name="radio" id="fasthelp1"
+                    class="" /> <label for="fasthelp1"><span><span></span></span>E-MAIL</label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-4" id="radiolabels2">
+                    <input type="radio" value="24" name="radio" id="fasthelp2"
+                    class="" /> <label for="fasthelp2"><span><span></span></span>PHONE</label>
+                </div>
+                
+                <div class="col-xs-12 col-sm-4" id="radiolabels3">
+                    <input type="radio" value="0" name="radio" id="fasthelp3"
+                    class="" /> <label for="fasthelp3"><span><span></span></span>TEXT</label>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+          <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 text-center">
+                    <p class="limited-paragraph">We're sorry you're having problems.<br>we will get to you ASAP.</p>
+                </div>
+            </div>
+          </div>
+      </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" role="button" id="submit">Submit</button>
+              </div>
+            </div>
+        </div>
+          
+      </form>
+    </section>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+ 
+
+    <script>
+        $("#back-button-id").click(function(){
+                    window.location="slide29.html";
+        });
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+     <script type="text/javascript">
+         //--------------------------------------------------------------------------------------------------------
+         //---------------------------------------------Image from Library-----------------------------------------
+         function openFileBrowser1(imag){
+             sessionStorage.setItem('ImageId',imag);
+             navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                                         quality: 50,
+                                         destinationType: Camera.DestinationType.FILE_URI,
+                                         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                                         correctOrientation: true,
+                                         targetWidth: 50,
+                                         targetHeight: 50
+                                         
+                                         });
+                                         //alert("uri: "+Camera.DestinationType.FILE_URI);
+         }
+     
+     //--------------------------------------Image from Library-Ends here-------------------------------------
+         
+         
+      var myFuncCalls = 0;
+      function openFileBrowser(image_Preview)
+      {
+       // alert('$ is defined');       
+        
+        var serverpath = "";
+        var imagepath = "";
+      
+        //alert('$ is defined');
+        var deviceInformation = ionic.Platform.version();  //fetch the device operating system
+        var currentPlatform = ionic.Platform.platform();  //fetch the device OS version
+        var o = new Object();
+            var app = {
+                  
+                  initialize: function() {
+                      this.bindEvents();
+                  },
+                 
+                  bindEvents: function() {
+                      document.addEventListener('deviceready', this.onDeviceReady, false);
+                  },
+                  
+                  onDeviceReady: function() {
+                      app.receivedEvent('deviceready');
+                      
+                  },
+                 
+                  receivedEvent: function(id) {
+                      var parentElement = document.getElementById(id);
+                      var listeningElement = parentElement.querySelector('.listening');
+                      var receivedElement = parentElement.querySelector('.received');
+
+                      listeningElement.setAttribute('style', 'display:none;');
+                      receivedElement.setAttribute('style', 'display:block;');
+
+                      console.log('Received Event: ' + id);
+                      
+                  function escapeShellArg(cmd) {
+                      return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+                  }
+
+                       var success = function(data) {
+                       console.log( data.filepath );
+                       var fileURL= data.filepath;
+                                            
+                       $("#"+image_Preview+"").css("background-image", "url("+escapeShellArg(fileURL)+")");
+ 
+                        var win = function (r) {
+                            console.log("Code = " + r.responseCode);
+                            console.log("Response = " + r.response);
+                            console.log("Sent = " + r.bytesSent);
+                             // $('#myModal').modal('show');
+                            serverpath=JSON.parse(r.response);
+                            imagepath=serverpath.path;
+                            myFuncCalls++;
+                           // alert("Count :"+myFuncCalls);
+                             //$('#myModal').modal('hide');
+                            //alert("Server path : "+serverpath.path);
+                            sessionStorage.setItem('profileimage'+myFuncCalls,serverpath.path);
+                            
+                        }
+
+                        var fail = function (error) {
+                            alert("An error has occurred: Code = " + error.code);
+                            console.log("upload error source " + error.source);
+                            console.log("upload error target " + error.target);
+                        }
+
+                        var options = new FileUploadOptions();
+                        
+                      
+                        options.fileKey = "fileToUpload";
+                        options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+                        options.mimeType = "image/jpg";
+
+                        var params = {};
+                        params.value1 = "test";
+                        params.value2 = "param";
+                       
+                        var ft = new FileTransfer();
+                        ft.upload(fileURL, encodeURI("http://in.shikshainfotech.com/FixIT/uploadjobphotos.php"), win, fail, options);
+                                               
+                    };
+                
+                    var error = function(msg) {
+                        console.log( msg );
+                    };
+                
+                    filechooser.open({},success,error);
+                      
+                  }
+              };
+
+         app.initialize();
+
+        }
+
+            var pictureSource;   // picture source
+            var destinationType; // sets the format of returned value
+            document.addEventListener("deviceready",onDeviceReady,false);
+            //alert("openCameraOptions called1");
+            function onDeviceReady() {
+            pictureSource=navigator.camera.PictureSourceType;
+            destinationType=navigator.camera.DestinationType;
+            }
+
+           function onPhotoDataSuccess(imageData) {
+               
+                var img = sessionStorage.getItem('ImageId');
+                                                
+                sessionStorage.setItem(img,imageData);
+
+               if(img != null || img != undefined)
+               {
+               
+                function escapeShellArg (cmd) {
+                            return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+                        }
+               $("#" + img + "").css("background-image", "url("+escapeShellArg(imageData)+")");
+               }
+               
+
+               var win = function (r) {
+                                console.log("Code = " + r.responseCode);
+                                console.log("Response = " + r.response);
+                                console.log("Sent = " + r.bytesSent);
+                                var serverpath=JSON.parse(r.response)
+                                //alert("Server path : "+serverpath.path);
+                                sessionStorage.setItem('profileimage',serverpath.path);
+                            }
+
+                            var fail = function (error) {
+                                
+                                console.log("upload error source " + error.source);
+                                console.log("upload error target " + error.target);
+                            }
+                            var oid= localStorage.getItem('oid');
+                            var options = new FileUploadOptions();
+                            
+                            options.fileKey = "fileToUpload";
+                            options.fileName = imageData.substr(imageData.lastIndexOf('/') + 1);
+                            options.mimeType = "image/jpg";
+                            
+                            var params = new Object();
+                            params.oid = oid;
+                           
+                            var ft = new FileTransfer();
+                            ft.upload(imageData, encodeURI("http://in.shikshainfotech.com/FixIT/uploadjobphotos.php"), win, fail, options);
+ 
+            }
+
+           function capturePhoto(imageids) {
+
+           // alert("imageids :"+imageids);
+            sessionStorage.setItem('ImageId',imageids);
+
+                 navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                                             quality: 50,
+                                             destinationType: Camera.DestinationType.FILE_URI,
+                                             correctOrientation: true,
+                                             targetWidth: 50,
+                                             targetHeight: 50
+                                             });
+
+            }
+
+            function onFail(message) {
+
+                alert('Failed because: ' + message);
+            }
+          
+ </script>
+  <script type="text/javascript">
+      /*$(window).load(function(){
+          $('#myModal').modal('show');
+      });*/
+          var imagepath1="";
+          var imagepath2="";
+          var imagepath3="";
+      $("#imagePreview1").on("click", function() {
+
+      $('#imgPreview1').modal('show');
+
+      $("#camera_option1").click(function(){
+
+            $('#imgPreview1').modal('hide');
+            capturePhoto('imagePreview1');
+    }); 
+
+          $("#gallery_option1").click(function(){
+
+          $('#imgPreview1').modal('hide');
+         openFileBrowser1('imagePreview1');
+      
+      });
+
+      
+    });
+    $("#imagePreview2").on("click", function() {
+
+      
+      $('#imgPreview2').modal('show');
+      
+      $("#camera_option2").click(function(){
+
+            $('#imgPreview2').modal('hide');
+            capturePhoto('imagePreview2');
+    }); 
+
+      $("#gallery_option2").click(function(){
+
+           $('#imgPreview2').modal('hide');
+
+         openFileBrowser1('imagePreview2');
+      
+      });
+
+
+    });
+    $("#imagePreview3").on("click", function() {
+
+      $('#imgPreview3').modal('show');
+      
+      $("#camera_option3").click(function(){
+            $('#imgPreview3').modal('hide');
+            capturePhoto('imagePreview3');
+    }); 
+
+      $("#gallery_option3").click(function(){
+
+           $('#imgPreview3').modal('hide');
+         openFileBrowser1('imagePreview3');
+      
+      });
+
+
+    });
+
+            $("#submit").on("click",function()
+          {
+
+      			var profileimage1 = sessionStorage.getItem("profileimage1");
+      			var profileimage2 = sessionStorage.getItem("profileimage2");
+      			var profileimage3 = sessionStorage.getItem("profileimage3");
+            var image_paths = profileimage1+","+profileimage2+","+profileimage3;
+            var wecanfixtext = document.getElementById("fix").value;
+            var jid = sessionStorage.getItem('jid');
+            //alert("JID :"+jid);
+            var text =/^([0-9 _-]+)$/;          
+            var reg=/[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/;
+	         if (!wecanfixtext)
+	         {
+	           document.getElementById("errorBox_wecanfix").innerHTML = "Please Enter your problem";
+	           return false;
+	         }
+	         else if((text.test(wecanfixtext)))
+	         {
+	           document.getElementById("errorBox_wecanfix").innerHTML = "Please Enter valid text";
+	           return false;
+	         }
+	         else if((reg.test(wecanfixtext)))
+	         {
+	           document.getElementById("errorBox_wecanfix").innerHTML = "Please Enter valid text";
+	           return false;
+	         }
+	         else
+	         {
+	          document.getElementById("errorBox_wecanfix").innerHTML = "";
+	         }
+
+	         var contact =  document.getElementsByName('radio');
+             var contact_type;
+	         for (var i = 0; i < contact.length;i++) 
+	          {    
+	              if (contact[i].checked) 
+	              {   
+	                 contact_type= contact[i].value;
+	                
+	              }
+	          }
+        
+           if(!contact_type)
+             {
+              
+            document.getElementById("errorBox_contact").innerHTML = "Select a range";                       
+           
+               return false;
+             }
+           else
+            {
+              document.getElementById("errorBox_contact").innerHTML = "";
+            }
+
+            //alert("Profile1 :"+profileimage1+"Profile2 :"+profileimage2+"Profile3 :"+profileimage3);
+            //alert("Help :"+wecanfixtext);
+            //alert("Contact Type :"+contact_type);
+            //alert('jid='+jid+'&issue='+wecanfixtext+'&photo='+image_paths+'&contact='+contact_type);
+             $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/incompletejob.php?",
+                 data:'jid='+jid+'&issue='+wecanfixtext+'&photo='+image_paths+'&contact='+contact_type,
+                 success: function (data) {
+                	 
+                 //alert(data);
+                 window.location="slide28.html";
+                 },
+                 error: function (jqXHR, textStatus, errorThrown) {
+                  alert('Error'+ errorThrown + textStatus + jqXHR);
+                  //window.location="slide4.html";
+                 }
+             }); 
+
+          });
+
+            //$("#settings_button").click( function()
+            //   {
+                             
+           //    window.location="slide28.html";
+           //    }
+           // );
+      
+    </script>
+
+  </body>
+</html>

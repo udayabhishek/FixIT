@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Logged In</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+  
+	
+  </head>
+  <body >
+
+    <nav class="navbar navbar-inverse navbar-top" role="navigation">
+        <div class="col-xs-8 col-sm-8 text-right" style="color:#fff;padding-top: 21px;">
+            <img style="float-right" src="img/logo-nav.png">
+        </div>
+        <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+
+        </div>
+        <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" id="settings_button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+    
+    </nav>
+    <section style="margin-top:30px; padding-bottom:70px; color:#000;">
+      <form >
+      <div class="container">
+        <div class="text-center">
+          <h4>Hello<strong><div id="getvalue"></div></strong></h4>
+           <h4>What kind of superhero are you looking for today?</h4>  
+                
+        </div>
+        <div id="logged">
+            <button type="button" class="btn btn-default btn-block" role="button" id="plumber">PLUMBER</button>
+            <button type="button" class="btn btn-default btn-block" role="button" id="electrician">ELECTRICIAN</button>
+            <button type="button" class="btn btn-default btn-block" role="button" id="handyman">HANDYMAN</button>
+          </div>
+      </div>
+
+      <div class="modal-footer navbar-fixed-bottom" id="button">
+        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" role="button" onclick="location.href='slide12.html';">Previous Jobs</button>
+          </div>
+       
+        </div>
+      </div>
+      </form>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+<!--    <script src="http://code.ionicframework.com/1.0.1/js/ionic.min.js"></script>-->
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            
+            getName();
+        }
+        
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+  
+        
+        function getName()
+        {
+            sessionStorage.setItem("previous_job_12","0");
+            var regname = localStorage.getItem('firstname');
+            
+            var gmailname=localStorage.getItem('gmailname');
+            var fbname=localStorage.getItem("fbname");
+            var new_fname = sessionStorage.getItem('new_fname');
+            if(new_fname==null)
+            {
+                if(regname != null)
+                {
+                    document.getElementById("getvalue").innerHTML = regname;
+                    call_login();
+                }
+                else if(gmailname != null)
+                {
+                    document.getElementById("getvalue").innerHTML = gmailname;
+                    checkGoogleData();
+                }
+                else if(fbname != null)
+                {
+                    document.getElementById("getvalue").innerHTML = fbname;
+                    checkFacebookData();
+                }
+                else
+                {
+                    document.getElementById("getvalue").innerHTML = "";
+                }
+            }
+            else
+            {
+                document.getElementById("getvalue").innerHTML = new_fname;
+            }
+            
+            return true;
+        }
+    
+    function call_login()
+    {
+        var $email=localStorage.getItem('$email');
+        var $password=localStorage.getItem('$password');
+        var gcmid=localStorage.getItem('token');
+        // alert("first method called");
+        //   alert('email='+$email+'&password='+$password+'&gcmid='+gcmid);
+        $.ajax({    //create an ajax request to load_page.php
+               type: "POST",
+               url: "http://in.shikshainfotech.com/FixIT/houseowner_login.php?",
+               data:'email='+$email+'&password='+$password+'&gcmid='+gcmid,
+               dataType: "json",   //expect html to be returned
+               success:function(response)
+               {
+               //alert("Details :"+JSON.stringify(response));
+               localStorage.setItem('user', $email);
+               var json_arr=JSON.stringify(response);
+               var obj = JSON.parse(json_arr);
+               //alert("inside function");
+               localStorage.setItem('oid', obj[0].oid);
+               localStorage.setItem('firstname', obj[0].firstName);
+               sessionStorage.setItem('lastname', obj[0].lastName);
+               sessionStorage.setItem('phone', obj[0].phone);
+               sessionStorage.setItem('countries', obj[0].countries);
+               sessionStorage.setItem('address', obj[0].address);
+               sessionStorage.setItem('city', obj[0].city);
+               sessionStorage.setItem('state', obj[0].state);
+               sessionStorage.setItem('homeowner_profilepic', obj[0].profilepic);
+               sessionStorage.setItem('creditcard_name', obj[0].creditcard_name);
+               sessionStorage.setItem('creditcard_number', obj[0].creditcard_number);
+               sessionStorage.setItem('expiration_month', obj[0].expiration_month);
+               sessionStorage.setItem('expiration_year', obj[0].expiration_year);
+               sessionStorage.setItem('security_code', obj[0].security_code);
+               sessionStorage.setItem('zipcode', obj[0].zipcode);
+               
+               //alert("creditcard_name "+ creditcard_name+" creditcard_number "+creditcard_number+" expiration_month "+ expiration_month+ " expiration_year "+ expiration_year);
+               
+               },
+               error: function (jqXHR, textStatus, errorThrown)
+               {
+	              // alert("Please Check Your Internet Connection.");
+               //window.location="slide4.html";
+               }
+               
+               
+               });
+    }
+    
+    function checkGoogleData()
+    {
+        //alert("checkGoogleData");
+        var  firstname=localStorage.getItem('gmailname');
+     	  var lastname=sessionStorage.getItem('lastname');
+          var image=sessionStorage.getItem('image');
+          var email=sessionStorage.getItem('email');
+          var gcmid=localStorage.getItem('token');
+          // alert("gcmid: "+ gcmid);
+          $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/houseowner_logingoogle.php?",
+                 data:'firstName='+firstname+'&lastName='+lastname+'&email='+email+'&image='+image+'&gcmid='+gcmid,
+                 success: function (data)
+                 {
+                 //alert("data is : "+ JSON.stringify(data));
+                 var oid=data.oid;
+                 if(oid==null)
+                 {
+                 // alert("i am getting oid as null");
+                 }
+                 else
+                 {
+                 localStorage.setItem("oid",oid);
+                 }
+                 }
+                 });
+    }
+    
+    function checkFacebookData()
+    {
+   	    var  firstname=localStorage.getItem('fbname');
+     	  var lastname=sessionStorage.getItem('lastname');
+          var image=sessionStorage.getItem('image');
+          var email=sessionStorage.getItem('email');
+          var gcmid=localStorage.getItem('token');
+          //alert("fb is called");
+          $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/houseowner_logingoogle.php?",
+                 data:'firstName='+firstname+'&lastName='+lastname+'&email='+email+'&image='+image+'&gcmid='+gcmid,
+                 success: function(data)
+                 {
+                 var oid=data.oid;
+                 if(oid==null)
+                 {
+                 //alert("oid is null");
+                 }
+                 else
+                 {
+                 localStorage.setItem("oid",oid);
+                 //window.location = "slide2.html";
+                 }
+                 }
+                 });
+    }
+   
+        $(document).ready(function() {
+                          var oid=localStorage.getItem('oid');
+                          // alert("oid is : "+ oid);
+                          $("#plumber").click(function()
+                                              {
+                                              sessionStorage.setItem("slide","slide2");
+                                              sessionStorage.setItem('data','1');
+                                              window.location="slide3.html";
+                                              }
+                                              );
+                          $("#electrician").click(function()
+                                                  {
+                                                  sessionStorage.setItem("slide","slide2");
+                                                  sessionStorage.setItem('data','2');
+                                                  window.location="slide3.html";
+                                                  }
+                                                  );
+                          $("#handyman").click(function()
+                                               {
+                                               sessionStorage.setItem("slide","slide2");
+                                               sessionStorage.setItem('data','3');
+                                               window.location="slide3.html";
+                                               }
+                                               );
+                          $("#settings_button").click( function()
+                                                      {
+                                                      sessionStorage.setItem("slide","slide2");
+                                                      window.location="slide28.html";
+                                                      }
+                                                      );
+                          });
+        </script>
+
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>slide 20</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript">
+    function get_details()
+    {
+    	//alert("hello ");
+    			var jid=sessionStorage.getItem('jid');	
+    		    var fname=localStorage.getItem('firstname');
+	            var lname=sessionStorage.getItem('lastname');
+	            var email=localStorage.getItem('user');
+	            var creditcard_number=sessionStorage.getItem('creditcard_number');
+	            var expiration_month=sessionStorage.getItem('expiration_month');
+	            var expiration_year=sessionStorage.getItem('expiration_year');
+	            var security_code=sessionStorage.getItem('security_code'); 
+	            var amount=sessionStorage.getItem('amount');
+	           /*  var fname='vankata';
+	            var lname='sudhakar';
+	            var email='sudhakar@gmail.com';
+	            var creditcard_number='4111111111111111';
+	            var expiration_month='07';
+	            var expiration_year='2017';
+	            var security_code='123'; */
+	            //alert('amount=45&firstname='+fname+'&lastname='+lname+'&email='+email+'&creditcard_number='+creditcard_number+'&expiration_month='+expiration_month+'&expiration_year='+expiration_year+'&security_code='+security_code);
+    			$.ajax({
+                type: "POST",
+                url: "http://in.shikshainfotech.com/FixIT/paymentdetails.php?",
+                data:'jid='+jid+'amount='+amount+'&firstname='+fname+'&lastname='+lname+'&email='+email+'&creditcard_number='+creditcard_number+'&expiration_month='+expiration_month+'&expiration_year='+expiration_year+'&security_code='+security_code,
+                success: function (data) 
+                {
+                	//alert("data is "+ JSON.stringify(data));
+                	document.getElementById("trnsc_details").innerHTML = data.id;
+                	document.getElementById("auth").innerHTML = data.auth;
+                	document.getElementById("amount").innerHTML = data.amount;
+                	document.getElementById("fname").innerHTML = data.fname;
+                	document.getElementById("lname").innerHTML = data.lname;
+                	document.getElementById("email").innerHTML = data.email;
+                	document.getElementById("number").innerHTML = data.num; 
+                	window.location="slide10.html";
+                	
+                }
+                });
+    }
+    </script>
+  
+  </head>
+  <body onload="get_details();">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            
+            <div class="text-center" style="color:#fff;padding-top: 5px;"><h4>Sign-up</h4></div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <section style="color:#000" id="main">
+      <form>
+      <div class="container">
+          
+          <div class="text-center" style="margin:150px 0">
+         	<!--  <h4>Transcation details:<script type="text/javascript">
+         	document.write(sessionStorage.getItem('id'));
+         	document.write(sessionStorage.getItem('auth'));
+         	document.write(sessionStorage.getItem('amount'));
+         	document.write(sessionStorage.getItem('fname'));
+         	document.write(sessionStorage.getItem('lname'));
+         	document.write(sessionStorage.getItem('email'));
+         	document.write(sessionStorage.getItem('num'));
+         	
+         	</script></h4>  --> 
+         
+         	 <h4>Transcation details:<span id="trnsc_details"></span></h4>
+           <h4>AUTH: <span id="auth"></span></h4>
+           <h4>Amount:<span id="amount"></span></h4> 
+           <h4>First NAME:<span id="fname"></span></h4>
+           <h4>Last NAME: <span id="lname"></span></h4>
+           <h4>EMAIL:<span id="email"></span></h4>
+           <h4>NUMBER:<span id="number"></span></h4> 
+           
+          </div>
+      </div>
+		 <!-- <button type="button" class="btn btn-default" role="button"  onclick="location.href='slide32.html';" >Done</button> -->
+       <div id="button" class="navbar-fixed-bottom"><div class="bottom-button-bg text-center"><button type="button" class="btn btn-default" onclick="location.href='slide10.html';">Done</button></div></div>
+
+      </form>
+    </section>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+  </body>
+</html>

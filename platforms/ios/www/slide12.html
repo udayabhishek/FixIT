@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 12</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/simplegallery.demo1.min.css">
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="./js/simplegallery.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+            $('#gallery').simplegallery({
+                galltime : 400,
+                gallcontent: '.content',
+                gallthumbnail: '.thumbnail',
+                gallthumb: '.thumb'
+            });
+        });
+    </script>
+  </head>
+  <body onload="loadPreviousJobs();">
+<!--    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+<!--            <div class="col-xs-7 col-sm-6 text-right" style="color:#fff;padding-top: 10px; float-right"><h4>Previous Jobs</h4></div>-->
+<!--            <div class="col-xs-5 col-sm-6  navbar-header">-->
+<!--                <button type="button" class="navbar-toggle" data-toggle="collapse" id="settings_button">-->
+<!--                    <span class="sr-only">Toggle navigation</span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--    </nav>-->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="col-xs-2 col-sm-2 text-left"
+            style="color: #fff;  padding: 10px 0 0 10px  ; ">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                id="back-button-id" >
+                <i class="fa fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="col-xs-8 col-sm-8 text-center"
+            style="color: #fff; padding-top: 15px;">
+            <h4>Previous Jobs</h4>
+        </div>
+        <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+<!--                <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--                        id="settings_button">-->
+<!--                        <span class="sr-only">Toggle navigation</span>-->
+<!--                        <span class="icon-bar"></span>-->
+<!--                        <span class="icon-bar"></span>-->
+<!--                        <span class="icon-bar"></span>-->
+<!--                </button>-->
+        </div>
+    </nav>
+    
+    <section style="margin-top:90px;color:#000" style="display:block">
+      <form>
+      <div class="container" id="MarginBottom">
+        
+      </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" role="button" id="back_button">Back</button>
+              </div>
+    
+    
+            </div>
+        </div>      
+
+          
+      </form>
+    </section>
+    <div class="col-md-12 text-center" id="absoluteCenter" style="display: none;">
+        	<h1>No Jobs</h1>
+        	<p>There are no jobs posted by you.</p>
+        </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        
+        $("#back-button-id").click(function(){
+            var previous_job=sessionStorage.getItem("previous_job_12");
+            if(previous_job == 1)
+            {
+                    window.location="slide28.html";
+            }
+            else if(previous_job ==0)
+            {
+                    window.location="slide2.html";
+            }
+        });
+ 
+        
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+
+      <script type="text/javascript">
+
+//"http://in.shikshainfotech.com/FixIT/uploads/job-photos/"
+    var image = "http://in.shikshainfotech.com/FixIT/uploads/job-photos/";
+    var jsonData_jobPic1 = "";
+    var jsonData_jobPic2 = "";
+    var jsonData_jobPic3 = "";
+    var count=0;
+    var id=0;
+    var jsonData_overallrating= ""; 
+    var job_pic="";
+    function loadPreviousJobs()
+        {
+                 var oid=localStorage.getItem('oid');
+                
+                // alert("oid ois: "+ oid);
+                 $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/previousjobs.php?",
+                 data:'oid='+oid,
+                 success: function(data) 
+                 {  
+                	//alert("DATA is : "+ JSON.stringify(data));
+                	//alert("length is : "+ data.length);
+                	if(data.length==0)
+                	{
+                		//alert("i am in if block");
+                		
+                		$('#absoluteCenter').show();
+                	}
+                	else 
+                	{
+                  for(var i=0;i<data.length;i++)
+                  {
+                	 // alert("i am in else block");
+              		//alert("data is :"+ JSON.stringify(data));
+                	  $('#absoluteCenter').hide();
+                    var jsonData_poston=data[i].poston.split('"').join('');
+                    var jsonData_status = data[i].status.split('"').join('');
+                    var jsonData_kindOfWork = data[i].kindOfWork.split('"').join('');
+                    var jsonData_fullname = data[i].fname.split('"').join('');
+                    var jsonData_lastName = data[i].lname.split('"').join('');
+                    var name = jsonData_fullname+"  "+jsonData_lastName;
+                    if(data[i].overall != null)
+                    {
+                      jsonData_overallrating = data[i].overall.split('"').join('');
+
+                    }
+                    job_pic = data[i].photos;
+                       var job_image1=job_pic[0];
+                       var job_image2=job_pic[1];
+                       var job_image3=job_pic[2];
+                       jsonData_jobPic1=image+job_image1;
+                       jsonData_jobPic2=image+job_image2;
+                       jsonData_jobPic3=image+job_image3;
+                       //alert(jsonData_jobPic1);
+                       //alert(jsonData_jobPic2);
+                       //alert(jsonData_jobPic3);
+                 
+                    id=id+1;
+                    var wrapper = $(".container");
+                     $(wrapper).append('<div class="form-group" id="profile-image"><div class="row"><div class="col-xs-4 col-sm-4"><div id="gallery" class="simplegallery" id="simplegallery'+id+'" onclick="getHomeOwnerDetails(\''+jsonData_jobPic1+'&'+jsonData_jobPic2+'&'+jsonData_jobPic3+'&'+ name+'&'+jsonData_kindOfWork+'&'+jsonData_status+'&'+jsonData_poston+'&'+jsonData_overallrating+'\');"><div class="content"><img src="'+jsonData_jobPic1+'" class="image_1" alt="" /><img src="'+jsonData_jobPic2+'" class="image_2" style="display:none" alt="" /></div><div class="clear"></div><div class="thumbnail"><div class="thumb"><a href="#" rel="1"><img src="'+jsonData_jobPic3+'" id="thumb_1'+id+'" alt="" /></a></div><div class="thumb"><a href="#" rel="2"><img src="'+jsonData_jobPic2+'" id="thumb_2'+id+'" alt="" /></a></div></div></div></div><div class="col-xs-8 col-sm-8" style="padding-right:5px;"><div><label for="date">'+jsonData_poston+'</label></div><div><label class="details" for="plumber" id="plumber'+id+'"></label></div><div><label class="details" for="status" id="status'+id+'"></label></div><div><label class="details" for="rating" id="rating'+id+'"><strong>Rating:</strong></label></div></div></div></div></div>');
+                    if(jsonData_kindOfWork == 1)
+                    {
+                    $("#plumber"+id).append('<strong>Plumber:</strong> <span>'+name+'</span>');
+                    }
+                    else if(jsonData_kindOfWork == 2)
+                    {
+                     $("#plumber"+id).append('<strong>Electrician:</strong> <span>'+name+'</span>');
+                    }
+                    else if(jsonData_kindOfWork == 3)
+                    {
+                     $("#plumber"+id).append('<strong>Handyman:</strong> <span>'+name+'</span>');
+                    }
+                    if(jsonData_status == 0)
+                    {
+                     $("#status"+id).append('<strong>Status:</strong> <span>Ongoing</span>');
+                    }
+                    else if(jsonData_status == 1)
+                    {
+                    $("#status"+id).append('<strong>Status:</strong> <span>Completed</span>');
+                    }
+
+                    for(var jrating=1;jrating<=jsonData_overallrating;jrating++)
+                       {
+                       
+                        $("#rating"+id).append('<span id="starRate" class="glyphicon glyphicon-star"></span>');
+                       
+                       }
+                  }
+                }
+                 },
+                 error: function (jqXHR, textStatus, errorThrown) 
+                 {
+                 //alert('Error'+ errorThrown + textStatus + jqXHR);                 
+                 }
+              }); 
+        }
+    
+		function getHomeOwnerDetails(prejob)
+		{
+			//alert("prejob: "+ prejob);
+			sessionStorage.setItem('previousjob', prejob);
+	    	window.location="perviousJobDetails.html";
+		}
+        $("#settings_button").click( function()
+               {
+               sessionStorage.setItem("slide","slide12");                             
+               window.location="slide28.html";
+               }
+        );
+        $("#back_button").click(function()
+        {
+        	var previous_job=sessionStorage.getItem("previous_job_12");
+			if(previous_job == 1)
+			{
+              window.location="slide28.html";
+			}
+			else if(previous_job ==0)
+			{
+				window.location="slide2.html";
+			}
+        });
+
+    </script>
+
+  </body>
+</html>

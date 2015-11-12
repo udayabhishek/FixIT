@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Screen 6</title>
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/font-awesome.css">
+        
+    </head>
+<body>
+    <nav class="navbar navbar-inverse navbar-top" role="navigation">
+        <!-- <div class="container"> -->
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="col-xs-3 col-sm-3" style="color:#ccc;padding-top: 10px;font-size: 25px;"><span class="glyphicon glyphicon-home" id="go_home"></span></div>
+        <div class="col-xs-6 col-sm-6 text-center" style="color:#fff;padding-top: 10px;"><h4>Share</h4></div>
+        <div class="col-xs-3 col-sm-6  navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" id="settings_button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div> 
+    </nav>
+    <section>
+      <form>
+      <div class="container text-center" id="share">
+          <div class="dummy">
+<!--              <h4><strong>Get <span>5%</span> off at Home Depot</strong></h4>-->
+              <h4>Please share this app with your friends and family.</h4>
+              <div id="social_message"><a href=""><img src="img/ico-fb.png" id="img-fb" class="img-responsive"></a><a href=""><img src="img/ico-twit.png" id="img-tw" class="img-responsive"></a><a href=""><img src="img/ico-g+.png" id="img-gp" class="img-responsive"></a><a href=""><img src="img/ico-mail.png" id="img-ml" class="img-responsive"></a><a href=""><img src="img/ico-share.png" id="img-sh" class="img-responsive"></a></div>
+          </div>          
+      </div>
+      <div class="modal-footer navbar-fixed-bottom" id="button">
+          <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default" role="button" id="thanks_no">No, thanks.</button>
+              </div>
+          </div>
+      </div>          
+      </form>
+    </section>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <script type="text/javascript" src="cordova.js"></script>
+<!--    <script type="text/javascript" src="Phonegap.js"></script>-->
+   <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/socialmessage.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+	<script type="text/javascript" src="js/internet_connection.js"></script>
+    <script type="text/javascript">
+    
+    $("#thanks_no").click( function(){
+                sessionStorage.clear();
+            	window.location="slide2.html";
+            
+    });
+    
+    $("#settings_button").click( function(){
+                sessionStorage.setItem("slide","slide11");
+            	window.location="slide28.html";
+    });
+    
+    $("#go_home").click( function(){
+                sessionStorage.clear();
+            	window.location="welcome_page.html";
+    });
+    
+  /*
+    $("#social_message").click( function(){
+            window.plugins.socialsharing.share('FixIt', null, null, 'http://shikshainfotech.com');
+                               
+//-------------------------------- OR ---------------------------
+            // Social_Message();
+            //window.location="slide2.html";
+    });
+  
+    function Social_Message(){
+        var message = {
+            subject: "Fixit",
+            url: "http://shikshainfotech.com",
+        };
+        window.socialmessage.send(message);
+    }
+    */
+
+
+
+    $("#img-fb").click(function(){
+                window.plugins.socialsharing.shareViaFacebook('Message via Facebook', null, null, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
+                   
+    });
+    $("#img-tw").click(function(){
+                      // alert("twitter");
+                       window.plugins.socialsharing.shareViaTwitter('Message via Twitter')
+                                      
+    });
+    $("#img-gp").click(function(){
+                       
+                       window.plugins.socialsharing.available(function(isAvailable) {
+                                                              // the boolean is only false on iOS < 6
+                                                              if (isAvailable) {
+                                                              // now use any of the share() functions
+                                                              
+                                                              window.plugins.socialsharing.share(null, null, null, 'https://google.com');
+                                                              }
+                                                              else{
+                                                              
+                                                              }
+                                                              });
+                       
+    });
+    $("#img-ml").click(function(){
+                       
+                       window.plugins.socialsharing.available(function(isAvailable) {
+                                                              // the boolean is only false on iOS < 6
+                                                              if (isAvailable) {
+                                                              // now use any of the share() functions
+                                                              
+                                                              window.plugins.socialsharing.share(null, null, null, 'https://google.com');
+                                                              }
+                                                              else{
+                                                              
+                                                              }
+                                                              });
+                       
+    });
+    $("#img-sh").click(function(){
+              
+                       window.plugins.socialsharing.available(function(isAvailable) {
+                                                              // the boolean is only false on iOS < 6
+                                                              if (isAvailable) {
+                                                              // now use any of the share() functions
+                                                             
+                                                               window.plugins.socialsharing.share(null, null, null, 'https://google.com');
+                                                              }
+                                                              else{
+                                                              
+                                                              }
+                                                              });
+                      
+                      
+    });
+
+
+    </script>  
+  </body>
+</html>

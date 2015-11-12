@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
+		<script src="js/ratchet.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/font-awesome.css">
+	</head>
+	<body>
+<!--	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+<!---->
+<!--            <div class="col-xs-12 col-sm-12 text-center" style="color:#fff;padding-top: 10px; float-right"><h4>Send Message</h4></div>-->
+<!--     -->
+<!--    </nav>-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- <div class="container"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Send Message</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+        <!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+        <!--            id="settings_button">-->
+        <!--            <span class="sr-only">Toggle navigation</span> <span-->
+        <!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+        <!--                    class="icon-bar"></span>-->
+        <!--        </button>-->
+        <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+    </div>
+    </nav>
+    <section style="padding-top:90px !important; color:#000;" >
+		<div class="container">
+			<div class="row">
+				<form>
+				  <div class="form-group">
+				    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;"><label for="exampleInputEmail1">Phone Number</label></div>
+				    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="number" class="form-control" id="number" disabled></div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;"><label for="exampleInputPassword1">Message</label></div>
+				    <div class="col-md-12 col-sm-12 col-xs-12"><textarea class="form-control" rows="5" id="message"></textarea></div>
+				  </div>
+				 <!--  <div class="form-group">
+				    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;"><label for="exampleInputFile">Uploade Image</div>
+				    <div class="col-md-12 col-sm-12 col-xs-12"><input type="file" id="image"></div>
+				  </div> -->
+
+				  	<div class="modal-footer navbar-fixed-bottom" id="button">
+			            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+			              <div class="btn-group" role="group">
+			                <button type="button" class="btn btn-new" role="button" id="sendMessage">SEND</button>
+			              </div>
+			              <div class="btn-group" role="group">
+			                <button type="button" class="btn btn-new" id="cancel_text">CANCEL</button>
+			              </div>
+			            </div> 
+		        	</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+		 <!-- <header class="bar bar-nav">
+	      <h1 class="title">SMS Demo</h1>
+	    </header>
+
+	    <div class="content">
+	    	<div class="content-padded">
+		    	<form>
+				<input type="text" id="number" placeholder="Phone Number"><br/>
+				<textarea id="message" placeholder="Message"></textarea>
+				<input type="button" class="btn btn-positive btn-block" id="sendMessage" value="Send Message">
+				</form>
+			</div>
+		</div>  -->
+
+	<script type="text/javascript" src="assets/www/js/bootstrap.min.js"></script>
+	<script src="cordova.js"></script>
+	   <script type="text/javascript" src="js/internet_connection.js"></script>	
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+        window.onload = function(){
+            //document.getElementById("number").value = contactno=sessionStorage.getItem('phoneno');
+             var num = sessionStorage.getItem('contactno');
+           // alert("num: "+num);
+           var newString = num.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+          // alert("num: "+num+" "+newString);
+            document.getElementById("number").value = newString;
+           // document.getElementById("number_phone").value = sessionStorage.getItem('contactno');
+        }
+    
+        $("#back-button-id").click(function(){
+            window.location="slide8.html";
+        });
+        
+        var contactno=sessionStorage.getItem('phoneno');
+	 //var contact =sessionStorage.getItem('contactno');
+	 //alert(contact + contactno);
+	 //number.value=contactno;
+	 //document.getElementById('#number').value=contact;
+
+    document.addEventListener("deviceready", init, false);
+
+
+    $("#sendMessage").click(function(){
+            var number = document.querySelector("#number").value;
+            var message = document.querySelector("#message").value;
+                            
+           // var message = document.getElementById("message").value();
+           // alert(number+"message"+message);
+                            
+            console.log("going to send "+message+" to "+number);
+                            
+                            //simple validation for now
+            if(number === '' || message === '') return;
+                            
+            var msg = {
+                    phoneNumber:number,
+                    textMessage:message,
+            };
+                            
+            sms.sendMessage(msg, function(message) {
+                    console.log("success: " + message);
+                    navigator.notification.alert(
+                            'Message to ' + number + ' has been sent.',
+                            null,
+                            'Message Sent',
+                            'Done'
+                    );
+            }, function(error) {
+                    console.log("error: " + error.code + " " + error.message);
+                    navigator.notification.alert(
+                            'Sorry, message not sent: ' + error.message,
+                            null,
+                            'Error',
+                            'Done'
+                    );
+            });
+            window.location = "slide6.html";
+    });
+        
+function init() {
+   
+	document.querySelector("#sendMessage").addEventListener("touchend", function() {
+		console.log("click");
+		var number = document.querySelector("#number").value;
+		var message = document.querySelector("#message").value;
+		//var image = document.querySelector("#image").src;
+		var intent = 'INTENT';
+		//alert(image);
+		console.log("going to send "+message+" to "+number);
+
+		//simple validation for now
+		if(number === '' || message === '') return;
+
+		var msg = {
+			phoneNumber:number,
+			textMessage:message,
+			//Images:image
+		};
+
+		sms.sendMessage(msg, function(message) {
+			console.log("success: " + message);
+			navigator.notification.alert(
+			    'Message to ' + number + ' has been sent.',
+			    null,
+			    'Message Sent',
+			    'Done'
+			);
+		}, function(error) {
+			console.log("error: " + error.code + " " + error.message);
+			navigator.notification.alert(
+				'Sorry, message not sent: ' + error.message,
+				null,
+				'Error',
+				'Done'
+			);
+		});
+	}, false);
+}
+    
+    $("#cancel_text").click(function(){
+                            
+                   var slide = sessionStorage.getItem("slide");
+                            if(slide =="slide8"){
+                                window.location = "slide8.html";
+                            }
+                            else
+                            {
+                            window.location = "slide6.html";
+                            
+                            }
+                            
+                            })
+
+	</script>
+	</body>
+</html>

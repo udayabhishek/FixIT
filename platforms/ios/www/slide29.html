@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Slide 29</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="col-xs-2 col-sm-2 text-left" style="color: #fff;  padding: 10px 0 0 10px;">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                id="back-button-id" >
+                <i class="fa fa-chevron-left"></i>
+            </button>
+        </div>
+        <div class="col-xs-8 col-sm-8 text-center"
+            style="color: #fff; padding-top: 15px;">
+            <h4>Support</h4>
+        </div>
+        <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+        </div>
+    </nav>
+
+
+    <section style="margin-top:65px;color:#000;">
+      <form>
+        <div class="row text-bold">
+            <div class="col-md-12 col-sm-12 col xs-12">
+                <ul class="list-group">
+                  <li class="list-group-item" id="help">How can we help?<span class="pull-right"><img src="img/arrow-right.png"></span></li>
+                  <li class="list-group-item" id="not_fixed">My problem was not fixed <span class="pull-right"><img src="img/arrow-right.png"></span></li>
+                  <li class="list-group-item" id="issues">Payment issues <span class="pull-right"><img src="img/arrow-right.png"></span></li>
+                  <li class="list-group-item" id="fixit">How to use Fixit? <span class="pull-right"><img src="img/arrow-right.png"></span></li>
+                </ul>
+            </div>
+        </div>
+      </form>
+    </section>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+<!---->
+<!--    <script>-->
+<!--        -->
+<!--      $(function() {-->
+<!--          $("#selectedFile").on("change", function()-->
+<!--          {-->
+<!--              var files = !!this.files ? this.files : [];-->
+<!--              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support-->
+<!--       -->
+<!--              if (/^image/.test( files[0].type)){ // only image file-->
+<!--                  var reader = new FileReader(); // instance of the FileReader-->
+<!--                  reader.readAsDataURL(files[0]); // read the local file-->
+<!--       -->
+<!--                  reader.onloadend = function(){ // set image data as background of div-->
+<!--                      $("#imagePreview").css("background-image", "url("+this.result+")");-->
+<!--                  }-->
+<!--              }-->
+<!--          });-->
+<!--      });-->
+<!--    </script>-->
+    <script type="text/javascript">
+        
+        
+        $("#back-button-id").click(function(){
+                window.location="slide28.html";
+        });
+        
+        $("#help").click(function(){
+
+           window.location="slide30-help.html";
+        });
+        
+        $("#not_fixed").click(function(){
+
+           var job_id= sessionStorage.getItem('jid');
+           //alert("JOB_ID :"+job_id);
+           if(job_id != null)
+           {
+             window.location="slide30.html";
+           }
+           else
+           {
+            window.location="jobNotFound.html";
+           }
+          
+        });
+        
+        $("#issues").click(function(){
+
+           window.location="slide30-issues.html";
+        });
+        
+        $("#fixit").click(function(){
+
+           window.location="slide30-Fixit.html";
+        });
+
+    </script>
+
+  </body>
+</html>

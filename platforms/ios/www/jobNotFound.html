@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Screen 30 Fixit</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+  </head>
+  <body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <!-- <div class="container"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Fixit</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+        
+    </div>
+</nav>
+
+
+    <section style="margin-top:75px;color:#000">
+      <form>
+      <div class="container">
+        <div class="form-group">
+              <p>Sorry, no any incomplete jobs found yet.</p>
+          </div>
+      </div>
+          
+        <div class="modal-footer navbar-fixed-bottom" id="button">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default" role="button">Back</button>
+              </div>
+            </div>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    $("#back-button-id").click(function(){
+                window.location="slide29.html";
+    });
+    $("#button").click(function(){
+                window.location="slide29.html";
+    });
+    
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Payment Details</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   	<!-- <script type="text/javascript" src="js/credit.js"></script> -->
+     <!-- <script src="jquery.creditCardValidator.js"></script> -->
+     
+    
+    
+	<script type="text/javascript">
+	
+	
+	//Validation For All the Fields
+	function validateCCname() 
+    {
+		var regx = /^[A-Za-z][-a-zA-Z ]+$/; 
+		var cname=document.paymentDetails.ccname.value;
+		if(cname != "")
+		{
+			
+				if(cname.length < 3 || cname.length > 51 )
+				   {
+					 //document.paymentDetails.ccname.focus();
+		    	  	 document.getElementById("errorBox_creditcard").innerHTML = "Credit Card Name Must contain 3 to 50 Characters";
+		    	     return false;
+				   }
+				else if(!regx.test(cname))
+			 	   {
+					 //document.paymentDetails.ccname.focus();
+		    	     document.getElementById("errorBox_creditcard").innerHTML = "Card Name must contain characters only.";
+		    	     return false;
+				   }
+				else
+					{
+
+				   	  document.getElementById("errorBox_creditcard").innerHTML = "";
+					}
+   		 }
+		
+		return true;
+    }
+		//Validation For Credit card Number
+	function validateCCnumber() 
+    {
+		var cardno=document.paymentDetails.cardno.value;
+		var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        var pmaster= /^(?:5[1-5][0-9]{14})$/;
+        var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+        var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+        var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+        var pamerica = /^(?:3[47][0-9]{13})$/;
+        var cardno_len=cardno.length;
+	
+	     if(cardno != "")
+	     {
+			     if(!(cardno.match(pvisa) || cardno.match(pmaster) || cardno.match(pdinner) || cardno.match(pdiscover) || cardno.match(pjcb) || cardno.match(pamerica)))
+		        	{
+					   document.getElementById("errorBox_cardno").innerHTML ="Not a valid  credit card number";
+			           return false;
+			      	}  
+			   
+				 else
+					{
+			
+					   	  document.getElementById("errorBox_cardno").innerHTML = "";
+					}
+	     }
+	   
+		return true;
+    }
+	
+		//
+	function getData()
+	{
+		var cname=document.paymentDetails.ccname.value;
+		var cardno=document.paymentDetails.cardno.value;
+		
+		
+		if(cname != "" || cardno != "")
+		{
+			//alert(" 2nd loop " +(cname !="" && cardno !="" && expmonth !="" && expyear !="" && scode !="" && zipcode !=""));
+			
+				//document.paymentDetails.mybutt.focus();
+				if( cname == "" )
+				   {
+					 //document.paymentDetails.ccname.focus() ;
+				     document.getElementById("errorBox_creditcard").innerHTML = "Enter Credit Card Name";
+				     return false;
+				   }
+				else
+					{
+					  document.getElementById("errorBox_creditcard").innerHTML ="";
+					}
+				
+				
+				 if( cardno == "" )
+				   {
+					 //document.paymentDetails.cardno.focus() ;
+				     document.getElementById("errorBox_cardno").innerHTML = "Enter Credit Card Number";
+				     return false;
+				   }
+				 else
+					{
+					  document.getElementById("errorBox_cardno").innerHTML ="";
+					}
+				 
+				 
+				  
+				  if(cname !="" && cardno !="")
+					{
+					 // alert("aa gaya");
+					  saveDetails();
+					}
+			
+			
+		}	
+		else
+		{
+			//alert(saveDetails());
+			saveDetails();
+		}
+		
+	}	
+		
+	function saveDetails() 
+    {
+		var regx = /^[A-Za-z][-a-zA-Z ]+$/; 
+		var cname=document.paymentDetails.ccname.value;
+		var cardno=document.paymentDetails.cardno.value;
+		var expmonth=document.paymentDetails.month.value;
+		var expyear=document.paymentDetails.date.value;
+		var scode=document.paymentDetails.seccode.value;
+		var zipcode=document.paymentDetails.zcode.value;
+		var cardno_len=cardno.length;
+		var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+		var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        var pmaster= /^(?:5[1-5][0-9]{14})$/;
+        var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+        var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+        var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+        var pamerica = /^(?:3[47][0-9]{13})$/;
+		var cvvno=/^[0-9]{3,4}$/; 
+		
+		
+		if(validateCCname() && validateCCnumber() && validateExpDate() && validateSeccode() && validateZipcode())
+   	  	{
+			
+	           
+	                    var $fname = sessionStorage.getItem('firstname');
+	                    var $lname = sessionStorage.getItem('lastname');
+	                    var $email = sessionStorage.getItem('emailid');
+	                    var $pwd = sessionStorage.getItem('password');
+	                    var $phoneno =sessionStorage.getItem('phoneNumber'); 
+	                    var $address = sessionStorage.getItem('address');
+	                    var $ccname = $('#ccid').val();
+	                    var $cardnum = $('#cardnum').val();
+	                    var $month = $('#month').val();
+	                    var $year = $('#year').val();
+	                    var $seccode = $('#scode').val();
+	                    var $zipcode = $('#zipcode').val();
+	                    
+	                    if($ccname == ""){
+	                    	$ccname=null;
+	                    }
+	                    
+	                    if($cardnum ==""){
+	                    	$cardnum=null;
+	                    }
+	                    if($month =="Select Month"){
+	                    	$month=null;
+	                    }
+	                    if($year =="Select Year"){
+	                    	$year=null;
+	                    }
+	                    if($seccode ==""){
+	                    	$seccode=null;
+	                    }
+	                    if($zipcode==""){
+	                    	$zipcode=null;
+	                    }
+	                 
+				
+			return true;
+   	 
+   	     }
+		//return false; 
+    }
+	</script>
+	<script>
+    $('#ccid').on('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^A-Za-z]/g,'') ); }
+);
+    </script>
+    
+    
+   
+    
+    <script>
+     $("#scode").keypress(function(){
+        var value = $(this).val();
+        value = value.replace(/[^0-9]+/g, '');
+        $(this).val(value);
+    });
+    </script>
+    
+    <script>
+     $("#zipcode").keypress(function(){
+        var value = $(this).val();
+        value = value.replace(/[^0-9]+/g, '');
+        $(this).val(value);
+    });
+    </script>
+	
+ <script type="text/javascript"> 
+	//Identify Credit Card Type based on Credit card number
+	function getCardType(number)
+	{
+    // visa
+   var pvisa = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+   var pmaster= /^(?:5[1-5][0-9]{14})$/;
+   var pdinner = /^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
+   var pdiscover = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
+   var pjcb = /^(?:(?:2131|1800|35\d{3})\d{11})$/;
+   var pamerica = /^(?:3[47][0-9]{13})$/;
+  // alert(number.match(pvisa));
+   
+   //Identify Visa Type
+    if (number.match(pvisa) != null)
+		{
+    	
+    	var image='<img src="img/visa-active.png">';
+    	document.getElementById("image").innerHTML=image;
+        return false;
+		}
+    else
+    	{
+    	var img='<img src="img/card_placeholder.png">';
+    	document.getElementById("image").innerHTML=img;
+    	}
+   
+  //Identify MasterCard Type
+   if (number.match(pmaster) != null)
+    	{
+		 var image='<img src="img/master-active.png">';
+		 document.getElementById("image").innerHTML=image;
+	     return false;
+    	}
+   else
+		{
+		var img='<img src="img/card_placeholder.png">';
+		document.getElementById("image").innerHTML=img;
+		}
+    
+   //Identify America Express Type
+  
+    if (number.match(pamerica) != null)
+    	{
+    	 var image='<img src="img/amex-active.png">';
+    	 document.getElementById("image").innerHTML=image;
+	     return false;
+    	}
+    else
+		{
+		var img='<img src="img/card_placeholder.png">';
+		document.getElementById("image").innerHTML=img;
+		}
+    // //Identify Discover Type
+    
+    if (number.match(pdiscover) != null)
+    	{
+    	var image='<img src="img/discover-active.png">';
+		document.getElementById("image").innerHTML=image;
+	    return false;
+    	}
+    else
+		{
+		var img='<img src="img/card_placeholder.png">';
+		document.getElementById("image").innerHTML=img;
+		}
+    
+    // //Identify Diners Type
+    
+    if (number.match(pdinner) != null)
+    	{
+    	var image='<img src="img/diners-active.png">';
+		document.getElementById("image").innerHTML=image;
+		return false;
+    	}
+    else
+		{
+		var img='<img src="img/card_placeholder.png">';
+		document.getElementById("image").innerHTML=img;
+		}
+   
+    
+   //Identify JCB Type
+    if (number.match(pjcb) != null)
+    {
+    	var image='<img src="img/jcb-active.png">';
+	    document.getElementById("image").innerHTML=image;
+		return false;
+    }	
+    else
+		{
+		var img='<img src="img/card_placeholder.png">';
+		document.getElementById("image").innerHTML=img;
+		}
+    return "";
+	}
+	</script> 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <!-- <div class="container"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="col-xs-8 col-sm-6 text-right" style="color:#fff;padding-top: 10px; float-right"><h4>Sign-Up</h4></div>
+            <div class="col-xs-4 col-sm-6  navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+
+            </div> 
+            
+            <!-- Collect the nav links, forms, and other content for toggling-->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">menu1</a>
+                    </li>
+                    <li>
+                        <a href="#">menu2</a>
+                    </li>
+                    <li>
+                        <a href="#">menu3</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+            
+        <!-- </div> -->
+        <!-- /.container -->
+    </nav>
+
+
+    <section style="color:#000">
+      <form name="paymentDetails">  
+      <div id="submitBox"></div>  
+      <div class="container" id="MarginBottom">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Select Payment Options</label>
+        </div>
+      
+       
+       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="headingOne">
+		      <h4 class="panel-title">
+		        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+		          Pay with PayPal
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+		      <div class="panel-body">
+		        This functionality is under development.It will be available shortly.
+		      </div>
+		    </div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="headingTwo">
+		      <h4 class="panel-title">
+		        <a class="collapsed in" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		          Pay with Credit Card
+		        </a>
+		      </h4>
+		    </div>		    
+		    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+		      <div class="panel-body">
+		      
+		        <div class="form-group">
+		        	<label for="exampleInputEmail1">Name on Credit Card</label>
+		          	<input type="text" name="ccname" class="form-control" id="ccid" onkeyup="this.value=this.value.replace(/[^A-Za-z]/g,'');" onblur="return validateCCname();" value="" disabled>
+		          	<div id="errorBox_creditcard" class="alertField"></div>		        	
+		        </div>
+		        <div class="form-group">
+		        	<div class="row">
+				        <div class="col-xs-12 col-sm-12">
+				          <label for="exampleInputEmail1">Card Number</label>
+				        </div>
+				        <div class="col-xs-9 col-sm-9">
+				          <input type="text" name="cardno" class="form-control" id="cardnum"  onchange="return validateCCnumber();" onkeyup="if(this.value.length>19){this.value='this.value';}" value=""  disabled>
+				        </div>
+				       
+				        <div class="col-xs-3 col-sm-3" id="image">
+				        	 <!-- <img src="img/master-active.png" class="img-responsive"> -->
+				        </div> 
+		           		
+		        	</div>
+		        	 <div id="errorBox_cardno" class="alertField"></div>
+		        </div>
+		   
+		        
+		      </div>
+		    </div>
+		    
+		  </div>
+		</div>
+      </div>
+
+
+      <div class="modal-footer navbar-fixed-bottom" id="button">
+        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+          <div class="btn-group" role="group" >
+            <button type="button" class="btn btn-default" role="button" id="mybutton" onclick="window.location='slide28.html'">Done</button>
+          </div>
+          <!-- <div class="btn-group" role="group" id="google">
+            <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Log in with <i class="fa fa-google-plus fa-lg"></i></button>
+          </div> --> 
+        </div>
+      </div>
+
+      <!-- <a href="slide18.html"><div id="button"><div class="bottom-button-bg text-center"><button class="btn btn-default">Submit</button></div></div></a>
+ -->
+      </form>
+    </section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file
+       
+                  reader.onloadend = function(){ // set image data as background of div
+                      $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+    </script>
+    
+    
+    <!-- <script src="creditcard_Validation/dist/payform.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    payform.cardNumberInput(document.getElementById('cardnum'));
+    </script>
+     -->
+	
+  </body>
+  <!-- <script>
+    $(function() {
+    	alert("HI");
+        $('#cardnum').validateCreditCard(function(result) {
+            if(result.card_type == null)
+            {
+            	alert("How r u?")
+                $('#cardnum').removeClass();
+            }
+            else
+            {
+            	alert("Not good");
+                $('#cardnum').addClass(result.card_type.name);
+            }
+            
+            if(!result.valid)
+            {
+            	alert("Everything is working");
+                $('#cardnum').removeClass("valid");
+            }
+            else
+            {
+            	alert("Sorry!!! u r in wrong field");
+                $('#cardnum').addClass("valid");
+            }
+            
+        });
+    });
+</script> -->
+</html>
+
+
+
+
+

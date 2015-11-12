@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>slide 17</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="PhonePlugin/build/css/intlTelInput.css">
+<link rel="stylesheet" href="PhonePlugin/build/css/demo.css">
+<link rel="stylesheet" href="css/font-awesome.css">
+<!-- <link  href="intl-tel-input-master/build/css/intlTelInput.css" rel="stylesheet">
+<link rel="stylesheet" href="intl-tel-input-master/build/css/demo.css"> -->
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-top" role="navigation">
+    <!-- <div class="container"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Sign-up</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+<!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--            id="settings_button">-->
+<!--            <span class="sr-only">Toggle navigation</span> <span-->
+<!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                    class="icon-bar"></span>-->
+<!--        </button>-->
+        <!-- <a class="navbar-brand" href="#">Start Bootstrap</a> -->
+    </div>
+</nav>
+
+
+	<section style="color: #000; margin-top:65px;">
+		<form name="form17" id="form17" enctype="multipart/form-data">
+
+			<div class="container">
+			
+			<div class="form-group">
+					<label for="exampleInputEmail1">Company Name </label> <input
+						type="text" name="Company" class="form-control" id="company">
+				</div>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputEmail1">First Name<span>*</span></label>
+							<input type="text" name="FirstName"
+								onkeyup="this.value=this.value.replace(/[^a-z]/g,'');"
+								class="form-control" id="firstname"
+								onchange="return validateFirstName();">
+
+							<div id="errorBox_firstname" class="alertField"></div>
+						</div>
+
+
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputPassword1">Last name<span>*</span></label> <input
+								type="text" name="LastName"
+								onkeyup="this.value=this.value.replace(/[^a-z]/g,'');"
+								class="form-control" id="lastname"
+								onchange="return validateLastName();">
+							<div id="errorBox_lastname" class="alertField"></div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email address<span>*</span></label>
+					<input type="email" name="EmailId" class="form-control"
+						id="emailid" onchange="return validateEmailId();">
+
+					<div id="errorBox_email_id" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Phone Number<span>*</span></label>
+					
+					 <!--  <input type="tel" name="phoneno" class="form-control" id="phoneNumber" onblur="validatePhoneNumber();" > -->
+					 <div class="input-group">
+						 <!-- <div class="input-group-addon">+91</div> -->
+						<input type="tel" name="PhoneNo" class="form-control"
+							id="phoneNumber" onblur="return validatePhoneNumber();">
+					</div> 
+					<div id="errorBox_phoneno" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Countries<span>*</span></label> 
+					<select id="country" name="country" class="form-control" onchange="return validatecountry();"></select>
+					<div id="errorBox_country" class="alertField"></div>
+				</div> 
+				
+				<!-- <div class="form-group">
+				
+            <label for="exampleInputEmail1">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber">
+            <div id="errorBox_phoneno" class="alertField"></div>
+          </div> -->
+				
+				<!-- <div class="form-group">
+					<label for="exampleInputEmail1">Company Name (Optional)</label> <input
+						type="text" name="Company" class="form-control" id="company">
+				</div> -->
+				<div class="form-group">
+					<label for="exampleInputEmail1">Address<span>*</span></label> <input
+						type="text" name="address" class="form-control" id="address"
+						onchange="return validateAddress();">
+
+					<div id="errorBox_address" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputEmail1">City<span>*</span>
+							</label> <input type="text"
+								name="city" class="form-control" id="city">
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<label for="exampleInputPassword1">State</label> <select
+								name="state" id="state" class="form-control">
+								
+							</select>
+						</div>
+					</div>
+					<div id="errorBox_city" class="alertField"></div>
+				</div>
+					
+				
+				<div class="form-group">
+					<label for="exampleInputEmail1">Zip Code<span>*</span></label> <input
+						type="number" name="zip" class="form-control" id="zip" maxlength="6" onkeyup="if(this.value.length>6){this.value='this.value';}"
+						onchange="return validateZip();">
+
+					<div id="errorBox_zip" class="alertField"></div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-8 col-sm-8">
+							<div class="col-md-12">
+								<label for="exampleInputEmail1">Profile Picture<span>*</span></label>
+							</div>
+							<div id="imagePreview" class="img-circle"
+								onclick="openFileBrowser()1;"></div>
+							<div class="uplload-button">
+								<div id="deviceready">
+								
+                <p class="event listening" style="display: none;"></p>
+                <p class="event received" style="display: none;"></p>
+									<input type="file" id="selectedFile"
+										name="selectedFile" style="display: none;" />
+								</div>
+								<!-- <input type="button" id="uploadFile" value="Browse"  class="img"/>-->
+							</div>
+						</div>
+						<div class="col-xs-4 col-sm-4">
+							<p style="margin-top: 30px;">Put your best face forward.
+								Adding a picture improves your credibility and increases your
+								chances of getting a job.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer navbar-bottom" id="button">
+				<div class="btn-group btn-group-justified" role="group"
+					aria-label="group button">
+					<div class="btn-group" role="group">
+						 <button type="button" class="btn btn-default" role="button" name="submit17"
+							onclick="return validateAllField();">Continue</button> 
+							<!-- <button type="button" class="btn btn-default" role="button" id="submit17"
+							onclick="ajax();">Continue</button> -->
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    
+    <!-- <script type="text/javascript" charset="utf-8" src="assets/plugins/org.apache.cordova.file/www/File.js"></script>
+	<script type="text/javascript" charset="utf-8" src="assets/plugins/org.apache.cordova.file-transfer/www/FileTransfer.js"></script> -->
+	
+	<script type="text/javascript" src="js/Countries.js"></script>
+    <script type="text/javascript">
+
+            populateCountries("country", "state");
+            populateCountries("country2");
+       
+	</script>
+	
+	
+	<script type="text/javascript">
+        $("#back-button-id").click(function(){
+                    window.location="welcome_page.html";
+                                   
+        });
+	
+	 var img_base64="";  
+    
+    function validateFirstName() 
+    {
+    	
+    	
+   	 var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+   	 
+   	 var fname = document.form17.FirstName.value;
+   	
+    	
+	 if( fname == "" )
+	   {
+		 document.form17.FirstName.focus() ;
+  	    // alert("Enter First Name");
+  	 document.getElementById("errorBox_firstname").innerHTML = "Enter first name";
+  	     return false;
+	   }
+	
+	
+	 else if(fname.length < 3 || fname.length > 51 )
+		 {
+		     document.form17.FirstName.focus() ;
+  	    // alert("Enter First Name");
+  	  	 document.getElementById("errorBox_firstname").innerHTML = "First name must contain 3 to 50 character";
+  	     return false;
+		 }
+	 else if(!regx.test(fname))
+	 	 {
+		     document.form17.FirstName.focus() ;
+  	  //  alert("Enter First Name");
+  	  	 document.getElementById("errorBox_firstname").innerHTML = "First name must contains character only.";
+  	     return false;
+		 }
+	 
+	 else
+		 {
+		 
+		     document.getElementById("errorBox_firstname").innerHTML="" ;
+		 }
+    	 return true;
+
+    }
+    
+  //Validation for last name
+    function validateLastName() 
+    {
+      	 var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+      	 var lname = document.form17.LastName.value;
+       	
+   	 if( lname == "" )
+   	   {
+   		document.form17.LastName.focus() ;
+     	 //  alert("Enter First Name");
+     	document.getElementById("errorBox_lastname").innerHTML = "Enter Last name";
+     	     return false;
+   	   }
+   	
+   	
+   	 else if(lname.length < 2 || lname.length > 51 )
+   		 {
+   		     document.form17.LastName.focus() ;
+     	 //  alert("Enter First Name");
+     	  	 document.getElementById("errorBox_lastname").innerHTML = "Last name must contain 2 to 50 character";
+     	     return false;
+   		 }
+   	 else if(!regx.test(lname))
+   	 	 {
+   		     document.form17.LastName.focus() ;
+     	//  alert("Enter First Name");
+     	  	 document.getElementById("errorBox_lastname").innerHTML = "Last name must contains character only.";
+     	     return false;
+   		 }
+   	 
+   	 else
+   		 {
+   		 
+   		     document.getElementById("errorBox_lastname").innerHTML=""  ;
+   		 }
+       	 return true;
+    }
+    //validate Email id
+    function validateEmailId() 
+    {
+    	 var email_id = document.form17.EmailId.value;
+    	 var emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    	
+    	 if (email_id == "" )
+    	    {
+    		      document.form17.EmailId.focus();
+		    	  document.getElementById("errorBox_email_id").innerHTML = "Enter Email ID";
+		    	  return false;
+    	    }
+    	 else if(!emailRegex.test(email_id))
+    	    {
+    		      document.form17.EmailId.focus();
+		    	  document.getElementById("errorBox_email_id").innerHTML = "Enter  Valid Email ID";
+		    	  return false;
+    	    }
+    	  else
+   			{
+    		  document.getElementById("errorBox_email_id").innerHTML = "Loading...";
+		 	  $.post('http://in.shikshainfotech.com/FixIT/serviceprovider_email_exist.php' , {'email' :  email_id}, function(status) {
+	    	   
+	           if(status=="exist")
+	           {
+	        	   //alert("hurreee");
+	        	// $(errorBox_email_id).html("Email Id Already Exist");
+	        	  document.getElementById("errorBox_email_id").innerHTML="Email Id Already Exist";
+	           	  return false;
+	           }
+	           else
+	           {
+	        	   document.getElementById("errorBox_email_id").innerHTML = "";
+	           }
+	   
+	       });
+   		 		
+   			} 
+    	 return true;
+    }
+   
+    //validate country
+   function validatecountry()
+    {
+    	  var list1 = document.getElementById('country');
+        var sel_country = list1.options[list1.selectedIndex].text;
+        var country = list1.options[list1.selectedIndex].value;
+        
+        if( sel_country == 'Select Country' )
+        {
+        	  document.getElementById("errorBox_country").innerHTML="Select Country";
+         	  return false;
+        }
+        else
+        {
+        	 document.getElementById("errorBox_country").innerHTML = "";
+        }
+    } 
+    
+    
+    	  //Validate Phone number 
+    function validatePhoneNumber() 
+    {
+    	 var phone_no = document.form17.PhoneNo.value;
+    	 //var stripped = phone_no.replace(/[\(\)\.\-\ ]/g, '');
+         var stripped = phone_no.replace(/[\.\@\!\#\$\%\^\&\*\=\|\ ]/g, '');
+    	 var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+    	 
+    		  
+    	if(phone_no == "")
+ 	   {
+ 		       document.form17.PhoneNo.focus();
+		    	   //alert("Enter Phone Number");
+		    	   document.getElementById("errorBox_phoneno").innerHTML = "Enter Mobile number";
+		    	   return false;
+		   }
+ 	  
+ 	 else if (isNaN(parseInt(stripped)))
+ 	   {
+ 		           //alert("stripped : " + stripped); 
+	    		   document.getElementById("errorBox_phoneno").innerHTML = "The phone number contains illegal characters. Don't include dash (-)\n";
+	    	       return false;
+ 	    } 
+ 	 else if (!(stripped.length >= 10 && stripped.length < 14  )) 
+ 	    {
+	    	    	document.getElementById("errorBox_phoneno").innerHTML= "Enter correct phone number";
+	    	        return false;
+ 	    }
+ 
+    	   
+    	 else
+			{
+
+		 		   document.getElementById("errorBox_phoneno").innerHTML="" ;
+		 		  
+			}
+    	 return true;
+    }
+    	  
+    function validateAddress()
+    {  
+      var address = document.form17.address.value;
+      var text = /^([0-9 _-]+)$/;
+      var reg = /[-!$%^&*()_+|~=`\\#{}\[\]:";'<>?,.\/]/;
+      
+      if(address == "")
+      {
+      
+      //document.form17.address.focus();
+      
+      document.getElementById("errorBox_address").innerHTML = "Enter address";
+      return false;
+      
+      }
+      else if(address.length < 10 || address.length > 250)
+      {
+        document.getElementById("errorBox_address").innerHTML = "Address must contain 10 to 250 characters";
+          return false;
+      }
+      else if ((text.test(address)))
+      {
+        document.getElementById("errorBox_address").innerHTML = "Please Enter valid address";
+        return false;
+      }
+      else if ((reg.test(address)))
+      {
+        document.getElementById("errorBox_address").innerHTML = "Please Enter valid address";
+        return false;
+      }         
+      else
+      {
+      
+      document.getElementById("errorBox_address").innerHTML="" ;
+      }
+      
+      return true;
+    }
+    	  function validatecity()
+    	  {
+    		  var city = document.form17.city.value;
+    		  
+    		  if(city == "")
+    		  {
+    			  document.form17.city.focus();
+    			  document.getElementById("errorBox_city").innerHTML = "Enter city";
+    			  return false;
+    		  }
+    		  else
+    		  {
+    			  document.getElementById("errorBox_city").innerHTML = " ";
+    		  }
+    		  return true;
+    	  }
+    	  function validateZip()
+    	  {
+    		  
+    		  var zip = document.form17.zip.value;
+    		  if(zip == ""|| isNaN( zip ))
+    		  {
+    		  
+    		    document.form17.zip.focus();
+    		    document.getElementById("errorBox_zip").innerHTML = "Enter correct zipcode";
+    		    return false;   
+    		  }
+    		  
+    		  else if(zip.length < 5 || zip.length > 6)
+    			  {
+    			  
+    			  document.form17.zip.focus();
+      		      document.getElementById("errorBox_zip").innerHTML = "Enter correct zipcode";
+    			  return false;
+    			  }
+    		
+    	  else
+    		  {
+    		  
+    		  document.getElementById("errorBox_zip").innerHTML="" ;
+    		  }
+    		  
+    		  return true;
+    	  }
+    	  
+    function validateAllField() 
+    {
+    	         /*var emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+               var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+               var fname = document.form17.FirstName.value;
+               var lname = document.form17.LastName.value;
+               var email_id = document.form17.EmailId.value;
+               var phone_no = document.form17.PhoneNo.value;
+               var company = document.form17.Company.value;
+               var address = document.form17.address.value;
+               var city = document.form17.city.value;
+               var zip = document.form17.zip.value;
+               var list = document.getElementById('state');
+               var state = list.options[list.selectedIndex].value;
+
+
+               var list1 = document.getElementById('country');
+               var country = list1.options[list1.selectedIndex].value;
+
+               var stripped = phone_no.replace(/[\.\@\!\#\$\%\^\&\*\=\|\ ]/g, '');
+               var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/; */
+
+    	  if(validateFirstName() && validateLastName() && validateEmailId()  && validatePhoneNumber() && validateAddress()  && validatecity() && validateZip())
+    	  
+    		{
+              
+               var emailRegex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+               var regx = /^[A-Za-z][-a-zA-Z ]+$/;
+               var fname = document.form17.FirstName.value;
+               var lname = document.form17.LastName.value;
+               var email_id = document.form17.EmailId.value;
+               var phone_no = document.form17.PhoneNo.value;
+               var company = document.form17.Company.value;
+               var address = document.form17.address.value;
+               var city = document.form17.city.value;
+               var zip = document.form17.zip.value;
+               var list = document.getElementById('state');
+               var state = list.options[list.selectedIndex].value;
+
+
+               var list1 = document.getElementById('country');
+               var country = list1.options[list1.selectedIndex].value;
+
+               var stripped = phone_no.replace(/[\.\@\!\#\$\%\^\&\*\=\|\ ]/g, '');
+               var isValid = /(^\d{5}$)|(^\d{5}-\d{4}$)/;    		     
+    		     //alert('validation form called');
+    		 
+		    	// alert('validatiuon form called with image : '+imagebase64String);
+		    	   
+		         sessionStorage.setItem('firstname', fname);
+		    	   sessionStorage.setItem('lastname', lname);
+		    	   sessionStorage.setItem('emailid', email_id);
+		    	   sessionStorage.setItem('phone_no', phone_no);
+		    	   sessionStorage.setItem('company', company); 
+		    	   sessionStorage.setItem('address', address); 
+		    	   sessionStorage.setItem('city', city); 
+		    	   sessionStorage.setItem('zip', zip); 
+		    	   sessionStorage.setItem('state', state); 
+		    	   sessionStorage.setItem('country', country);
+		    	   sessionStorage.setItem('company', company);  
+		    	   
+		    	
+		    	   //var img = img_base64;
+		    	   //var filePath=$("#selectedFile").val(); 
+		    	  
+		    	  // alert('img path : '+img);
+		    	  /* var y = JSON.stringify($('#form17')
+                           .serializeArray());*/
+		    	   
+		    	  // alert('form data : '+y);
+		    	   //var dataString = "JSON1="+encodeURIComponent(y)+"&photo="+img;
+
+		    	  /* $.ajax({
+		               type: "POST",
+		               url: "http://in.shikshainfotech.com/FixIT/serviceprovider_registration_1.php",
+		               data:dataString,
+		               success: function (data) {
+		            	  alert("SUCCESS : "+data);
+		                  window.location = "slide18.html";
+
+		               },
+		               error: function (jqXHR, textStatus, errorThrown) {
+		                alert('Error'+errorThrown);
+		               }
+		           }); */
+
+		    	   
+		    	 window.location = "slide18c.html";
+		    	   
+    	    	
+    	  }
+    }
+    
+    </script>
+
+
+	<script>
+        //--------------------------------------------------------------------------------------------------------
+        //---------------------------------------------Image from Library-----------------------------------------
+        function openFileBrowser1(imag){
+            sessionStorage.setItem('ImageId',imag);
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+                                        quality: 50,
+                                        destinationType: Camera.DestinationType.FILE_URI,
+                                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                                        correctOrientation: true,
+                                        targetWidth: 50,
+                                        targetHeight: 50
+                                        });
+                                        //alert("uri: "+Camera.DestinationType.FILE_URI);
+        }
+    
+    //--------------------------------------Image from Library-Ends here-------------------------------------
+	   //document.addEventListener("deviceready", onDeviceReady, false);
+		//alert('$ is defined');
+	
+	    
+ /*   $(document).ready(function() {
+	   
+	   alert("onchange called");
+	 
+    	  $("#selectedFile").on("change", function()
+    	          {
+    	        	 
+    		  alert("onchange called");
+    	        	 
+    	        	   var files = !!this.files ? this.files : [];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    	        		
+    	              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+    	             
+    	              if (/^image/.test( files[0].type)){ // only image file
+    	            	  
+    	            	 
+    	                  var reader = new FileReader(); // instance of the FileReader
+    	                  
+    	                  reader.readAsDataURL(files[0]); // read the local file
+    	                  var filePath=$("#selectedFile").val(); 
+    	                  
+    	                  alert('FILE PATH :'+filePath);
+    	                  
+    	                  reader.onloadend = function(){ // set image data as background of div
+    	                	  $("#imagePreview").css("background-image", "url("+this.result+")");
+    	                	  img_base64 = this.result;
+    	                 console.error(""+imagebase64String);
+    	                 //sessionStorage.setItem("imagebase64",imagebase64String);
+    	                 alert('image stored in session');
+    	                  }
+    	              }
+    	          });
+    
+      }); */
+   //console.error(MyProject.intro);
+        
+        function openFileBrowser(){
+    		//alert('$ is defined');
+    		//$("#selectedFile").click();
+    		
+    		
+	    	// alert('$ is defined');
+	    	var deviceInformation = ionic.Platform.version();  //fetch the device operating system
+	    	var currentPlatform = ionic.Platform.platform();  //fetch the device OS version
+          // alert("Device OS: " + deviceInformation); 
+          // alert("Device OS Version: " + currentPlatform); 
+           
+           //if( ionic.Platform.platform() === 'android' && ionic.Platform.version().toString().indexOf('4.4') === 0 ) {
+       		
+       		
+          	// alert('if block called');
+          	 
+          	var app = {
+          		    // Application Constructor
+          		    initialize: function() {
+          		        this.bindEvents();
+          		    },
+          		    // Bind Event Listeners
+          		    //
+          		    // Bind any events that are required on startup. Common events are:
+          		    // 'load', 'deviceready', 'offline', and 'online'.
+          		    bindEvents: function() {
+          		        document.addEventListener('deviceready', this.onDeviceReady, false);
+          		    },
+          		    
+          		    onDeviceReady: function() {
+          		        app.receivedEvent('deviceready');
+          		    },
+          		    // Update DOM on a Received Event
+          		    receivedEvent: function(id) {
+          		        var parentElement = document.getElementById(id);
+          		        var listeningElement = parentElement.querySelector('.listening');
+          		        var receivedElement = parentElement.querySelector('.received');
+
+          		        listeningElement.setAttribute('style', 'display:none;');
+          		        receivedElement.setAttribute('style', 'display:block;');
+
+          		        console.log('Received Event: ' + id);
+          		        
+						function escapeShellArg (cmd) {
+						    return '\'' + cmd.replace(/\'/g, "'\\''") + '\'';
+						}
+
+          		        var success = function(data) {
+          			        console.log( data.filepath );
+          			        var fileURL= data.filepath;
+
+          			      //alert("File Url : "+fileURL);
+          			       
+						 $("#imagePreview").css("background-image", "url("+escapeShellArg(fileURL)+")");
+ 
+          			        var win = function (r) {
+          			            console.log("Code = " + r.responseCode);
+          			            console.log("Response = " + r.response);
+          			            console.log("Sent = " + r.bytesSent);
+          			            var serverpath=JSON.parse(r.response)
+          			            //alert("Server path : "+serverpath.path);
+          			            sessionStorage.setItem('profileimage',serverpath.path);
+          			        }
+
+          			        var fail = function (error) {
+          			            //alert("An error has occurred: Code = " + error.code);
+          			            console.log("upload error source " + error.source);
+          			            console.log("upload error target " + error.target);
+          			        }
+
+          			        var options = new FileUploadOptions();
+          			        
+          			       // alert("File Upload Options Called");
+          			        options.fileKey = "fileToUpload";
+                	        options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+          			        options.mimeType = "image/jpg";
+
+          			        var params = {};
+          			        params.value1 = "test";
+          			        params.value2 = "param";
+
+          			        //options.params = params;
+   	                	   
+          			        var ft = new FileTransfer();
+          			        ft.upload(fileURL, encodeURI("http://in.shikshainfotech.com/FixIT/serviceprovider_photo_upload.php?"), win, fail, options);
+          			        
+          			        
+          			    };
+          			
+          			    var error = function(msg) {
+          			        console.log( msg );
+          			    };
+          			
+          			    filechooser.open({},success,error);
+          		        
+          		    }
+          		};
+
+          	//app.receivedEvent('deviceready'); 
+          	 app.initialize();
+          	 //alert('if block executed');
+           
+         //  }
+           
+          
+	
+ 
+        	
+        	
+        }
+  
+         /*  function onDeviceReady() {
+
+              // Retrieve image file location from specified source
+              navigator.camera.getPicture(uploadPhoto,
+                                          function(message) { alert('get picture failed'); },
+                                          { quality: 50, 
+                                          destinationType: navigator.camera.DestinationType.FILE_URI,
+                                          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
+                                          correctOrientation: true }
+                                          );
+
+          } */
+
+          function uploadPhoto(filePath) {
+        	  
+        	  var uri = encodeURI("http://in.shikshainfotech.com/FixIT/serviceprovider_imageupload.php");
+              var options = new FileUploadOptions();
+              options.fileKey="file";
+              options.fileName=filepath.substr(filepath.lastIndexOf('/')+1);
+
+              var ft = new FileTransfer();
+              ft.onprogress = function(progressEvent) {
+                  if (progressEvent.lengthComputable) {
+                      loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+                  } 
+                  else {
+                      loadingStatus.increment();
+                  }
+              };
+
+              ft.upload(filepath, uri, win, fail, options);  
+          };
+
+          
+          
+          function win(r) {
+              console.log("Code = " + r.responseCode);
+              console.log("Response = " + r.response);
+              console.log("Sent = " + r.bytesSent);
+          }
+
+          function fail(error) {
+              //alert("An error has occurred: Code = " + error.code);
+              console.log("upload error source " + error.source);
+              console.log("upload error target " + error.target);
+          }
+      
+   
+    </script>
+    
+   <!--  <script>
+
+    	   $('form17').submit(function() {
+    		  
+    		  alert('submit17 called');
+    	    console.log($(this).serializeArray());
+    	    var JSONString = JSON.stringify($(this).serializeArray());
+    	    /* $('#result').text(JSON.stringify($(this).serializeArray())); */
+    	   // return false;
+    	  //}); 
+    	 
+
+    
+    </script> -->
+	<script>
+    
+	    $('#textBoxId').on('keyup blur',function(){ 
+		var node = $(this);
+		node.val(node.val().replace(/[^a-z]/g,'') ); }
+		);
+	    
+	    
+	</script>
+
+   <script src="PhonePlugin/build/js/intlTelInput.js"></script>
+    <script>
+      $("#phoneNumber").intlTelInput({
+    	//  allowExtensions: false,
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        //defaultCountry: "jp",
+        //nationalMode: false,
+         numberType: "MOBILE",
+        //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        //preferredCountries: ['cn', 'jp'],
+        //responsiveDropdown: true,
+        utilsScript: "PhonePlugin/lib/libphonenumber/build/utils.js"
+      });
+    </script> 
+
+
+</body>
+</html>

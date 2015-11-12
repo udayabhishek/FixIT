@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OpenFB Sample</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="ratchet.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body  onload="getInfo()">
+
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/internet_connection.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="openfb.js"></script>
+<script type="text/javascript" src="js/SocialSharing.js"></script>
+
+
+<script>
+
+     // Defaults to sessionStorage for storing the Facebook token
+     openFB.init({appId: '1610017355938166'});
+
+    //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
+    //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+
+    function login() 
+    {
+        openFB.login(
+                function(response) 
+                {
+                    if(response.status === 'connected') 
+                    {
+                        //alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
+                    } 
+                    else 
+                    {
+                        //alert('Facebook login failed: ' + response.error);
+                    }
+                }, {scope: 'email'});
+    }
+    var fbname=new String();
+    function getInfo() 
+    {
+        openFB.api({
+            path: '/me',
+            success: function(data) 
+            {
+              fbname+=data.name;
+              fbname=fbname.split(" ");
+              var firstname=fbname[0];
+              var lastname=fbname[1];
+              var image='http://graph.facebook.com/' + data.id + '/picture?type=small';
+              localStorage.setItem("fbname",firstname);
+              sessionStorage.setItem("lastname",lastname);
+              sessionStorage.setItem("email",data.id);
+              sessionStorage.setItem("image",image);
+              localStorage.setItem('user',data.id);
+              sendFacebookData();
+            },
+            error: errorHandler});
+    }
+
+    function share() {
+        openFB.api({
+            method: 'POST',
+            path: '/me/feed',
+            params: {
+                message: document.getElementById('Message').value || 'Testing Facebook APIs'
+            },
+            success: function() {
+                alert('the item was posted on Facebook');
+            },
+            error: errorHandler});
+    }
+
+    function readPermissions() {
+        openFB.api({
+            method: 'GET',
+            path: '/me/permissions',
+            success: function(result) {
+               // alert(JSON.stringify(result.data));
+            },
+            error: errorHandler
+        });
+    }
+
+    function revoke() {
+        openFB.revokePermissions(
+                function() {
+                    alert('Permissions revoked');
+                },
+                errorHandler);
+    }
+
+    function logout() {
+        openFB.logout(
+                function() {
+                    alert('Logout successful');
+                },
+                errorHandler);
+    }
+
+    function errorHandler(error) {
+        alert(error.message);
+    }
+
+    function sendFacebookData()
+    {
+  	      var firstname=localStorage.getItem('fbname');
+    	  var lastname=sessionStorage.getItem('lastname');
+    	  var image=sessionStorage.getItem('image');
+    	  var email=sessionStorage.getItem('email');
+    	  var gcmid=localStorage.getItem('token');
+        if (gcmid != null) {
+  	  	$.ajax({
+        type: "POST",
+        url: "http://in.shikshainfotech.com/FixIT/houseowner_logingoogle.php?",
+        data:'firstName='+firstname+'&lastName='+lastname+'&email='+email+'&image='+image+'&gcmid='+gcmid,
+        success: function (data) 
+        {   
+  			var oid=data.oid;
+  			if(oid==null)
+  			{
+  				//alert("oid is null");
+  			}
+  			else
+  			{
+  				localStorage.setItem("oid",oid);
+        	    window.location = "slide2.html";
+  			}
+        },
+        error: function (jqXHR, textStatus, errorThrown) 
+             {
+                 //alert("Please Check Your Internet Connection.");
+                  alert('Error'+ errorThrown + textStatus + jqXHR); 
+                 //window.location="slide4.html";
+             }
+        }); 
+      }
+      else
+      {
+        //alert("i am in else block");
+        window.location="index.html";
+      }
+    }
+</script>
+</body>
+</html>

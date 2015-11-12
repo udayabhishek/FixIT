@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Screen 4</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="css/font-awesome.css">
+
+
+</head>
+<body onload="populateListView(); getLocation();">
+
+<nav class="navbar navbar-inverse navbar-top" role="navigation">
+    <!-- <div class="container"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="col-xs-2 col-sm-2 text-left"
+        style="color: #fff;  padding: 10px 0 0 10px  ; ">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            id="back-button-id" >
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="col-xs-8 col-sm-8 text-center"
+        style="color: #fff; padding-top: 15px;">
+        <h4>Selection</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2  navbar-header text-right" style="padding-top: 10px;">
+<!--        <button type="button" class="navbar-toggle" data-toggle="collapse"-->
+<!--            id="settings_button">-->
+<!--            <span class="sr-only">Toggle navigation</span> <span-->
+<!--                class="icon-bar"></span> <span class="icon-bar"></span> <span-->
+<!--                    class="icon-bar"></span>-->
+<!--        </button>-->
+
+    </div>
+</nav>
+
+
+	<section style=" color: #000">
+        <p id="paragraph-no-providers">Please Wait <img alt="" src="img/thinking_loader.gif"></p>
+		<form>
+			<div class="container" id="MarginBottom"></div>
+
+			<div class="modal-footer navbar-fixed-bottom" id="button">
+				<div class="col-xs-12 col-sm-12 text-left plumberSelected">
+					<label class="details" for="exampleInputEmail1"><span id="provider_seleted"></span>
+						Selected: <span id="plumbers_selected">0</span>
+					</label>
+				</div>
+				<div class="btn-group btn-group-justified" role="group"
+					aria-label="group button">
+					<div class="btn-group" role="group">
+						<!-- <button type="button" class="btn btn-default" onclick="slide5_2();" role="button" data-toggle="modal" data-target="#myModal">Continue</button> -->
+						<button type="button" class="btn btn-default" id="continue"
+							role="button">Continue</button>
+					</div>
+					<!--<div class="btn-group" role="group">
+                <button type="button" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">I'll Pick</button>
+              </div>-->
+				</div>
+			</div>
+
+
+		</form>
+
+	</section>
+
+
+	<div class="modal fade" id="continueModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="ModelTopBorder"></div>
+				<div class="modal-body text-center">
+
+					<p>Do You Want to send Request?</p>
+				</div>
+
+				<div class="modal-footer" id="ModalButton">
+					<div class="btn-group btn-group-justified" role="group"
+						aria-label="group button">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" role="button"
+								data-dismiss="modal">Send</button>
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" role="button"
+								data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/ionic.min.js"></script>
+    <script type="text/javascript" src="js/internet_connection.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+        
+        $("#back-button-id").click(function(){
+                    window.location="slide13a.html";
+            });
+      $(function() {
+          $("#selectedFile").on("change", function()
+          {
+              var files = !!this.files ? this.files : [];
+              if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+       
+              if (/^image/.test( files[0].type)){ // only image file
+                  var reader = new FileReader(); // instance of the FileReader
+                  reader.readAsDataURL(files[0]); // read the local file       
+                  reader.onloadend = function(){ // set image data as background of div
+                  $("#imagePreview").css("background-image", "url("+this.result+")");
+                  }
+              }
+          });
+      });
+   
+	
+    var image = "http://in.shikshainfotech.com/FixIT/uploads/serviceprovider-profile-images/";
+    var jsonData_profilePic = "";
+    var count=0;
+    var id=0;
+    var kindofwork=sessionStorage.getItem('kindofwork');
+    var zipcode=sessionStorage.getItem('pin');
+        function populateListView()
+        {
+
+          //alert("Kind of work :"+kindofwork);
+          //alert("Zipcode :"+zipcode);
+                 var back_page_reload=sessionStorage.setItem("back_page_reload",'1');
+                 var wrapper = $(".container");
+                 var newDate = new Date();
+                 var day = getWeekDay(newDate);
+                 var hours = newDate.getHours();
+                 sessionStorage.setItem('day',day);
+                 sessionStorage.setItem('hours',hours);
+                 var arr= [];   
+                 var str = new String(); 
+                 $.ajax({
+                 type: "POST",
+                 url: "http://in.shikshainfotech.com/FixIT/activeproviderslist.php?",
+                 data:'kindOfWork='+kindofwork+'&zipcode='+zipcode+'&day='+day+'&time='+hours,
+                 success: function (data) {
+                         $("#paragraph-no-providers").hide();
+                 //alert("Success :"+JSON.stringify(data));               
+                  for(var i=0;i<data.length;i++)
+                  {
+                       
+                    var jsonData_pid=JSON.stringify(data[i].pid).split('"').join('');
+                    str+=jsonData_pid+", ";
+                    arr.push(jsonData_pid);
+                    var jsonData_fullname = JSON.stringify(data[i].firstName).split('"').join('');
+                    var jsonData_lastName = JSON.stringify(data[i].lastName).split('"').join('');
+                    var name = jsonData_fullname+"  "+jsonData_lastName;
+                    var profile_pic = JSON.stringify(data[i].profilePic).split('"').join('');
+                    jsonData_profilePic = image+profile_pic;
+                    var jsonData_town = JSON.stringify(data[i].town).split('"').join('');
+                    var jsonData_state = JSON.stringify(data[i].state).split('"').join('');
+                    var jsonData_charge = JSON.stringify(data[i].charge).split('"').join('');
+                    var jsonData_rating = JSON.stringify(data[i].Overall_Rating).split('"').join('');
+                    var contact_sp = JSON.stringify(data[i].phone).split('"').join('');
+                    id=id+1;
+                    $(wrapper).append('<div class="form-group" id="profile-image"  ><div class="row"><div class="col-xs-4 col-sm-4"><img src="'+jsonData_profilePic+'" onclick="clickonimage(\''+jsonData_profilePic+'&'+name+'&'+jsonData_town+'&'+jsonData_state+'&'+jsonData_charge+'&'+jsonData_rating+'&'+jsonData_pid+'&'+contact_sp+'\');" class="img-circle img-H-W"></div><div class="col-xs-8 col-sm-8" style="padding-right:5px;"><label for="exampleInputEmail1">'+name+'</label><label class="details" for="exampleInputEmail1">Town, State: <span>'+jsonData_town+', '+jsonData_state+'</span></label><label class="details" for="exampleInputEmail1">Range of Hourly Quote: <span>'+jsonData_charge+'</span></label><label class="details" for="exampleInputEmail1" id="star_rating'+id+'">Rating: </label><img src="img/icon-gps.png" onclick="map();"  class="gps" alt=""><input  class="native-hidden add"  type="checkbox" id="checkid'+jsonData_pid+'" onchange="onCheckBoxChange();"/></div></div></div>');
+
+                    for(var jrating=1;jrating<=jsonData_rating;jrating++)
+                       {
+                          
+                        $("#star_rating"+id).append('<span id="starRate" class="glyphicon glyphicon-star"></span>');
+                       
+                       }
+                   
+                  }
+                  
+               
+                 },
+                 error: function (jqXHR, textStatus, errorThrown) 
+                 {
+                        $("#paragraph-no-providers").text("Sorry, no providers are available!");
+                 //alert('Error'+ errorThrown + textStatus + jqXHR);                 
+                 }
+              }); 
+                 
+                 if(kindofwork=='1')
+                 {
+                	 document.getElementById("provider_seleted").innerHTML = "Plumber";
+                 }
+                 else if(kindofwork=='2')
+                 {
+                	 document.getElementById("provider_seleted").innerHTML = "Electrician";
+                 }
+                 else
+                 {
+                	 document.getElementById("provider_seleted").innerHTML = "Handyman";
+                 }
+                 
+                 
+                 
+        }
+        
+        function getWeekDay(date)
+        {
+               var days = ['1','2','3','4','5','6','7']
+               return days[ date.getDay() ]
+        }
+        
+        function onCheckBoxChange()
+        {
+                      
+               var numberOfChecked = $('input:checkbox:checked').length;
+               var totalCheckboxes = $('input:checkbox').length;
+               var numberNotChecked = totalCheckboxes - numberOfChecked;
+               $("#plumbers_selected").text(numberOfChecked);  
+               sessionStorage.setItem('numberOfChecked',numberOfChecked);
+        }
+    function callBackFunction(){
+        console.log('ok');
+    }
+    	$( "#continue" ).click(function() 
+    	{
+         var checkArr = new Array();
+         var str = new String();
+    		 var numberOfChecked= sessionStorage.getItem('numberOfChecked');
+    		    if(numberOfChecked == null)
+    			{
+    			//	alert("Please Choose Atleast One Service Provider");
+                   // navigator.notification.alert("This is my Alert text!",callBackFunction,
+//'Alert Title',["Ok", "Awesome"]);
+    			}
+    			else if(numberOfChecked == 0)
+    			{
+    				//alert("Please Choose Atleast One Service Provider");
+                  //  navigator.notification.alert("This is my Alert text!",callBackFunction,
+                //                                            'Alert Title',["Ok", "Awesome"]);
+    			}
+    			else
+    			{
+    		  		var inputs = document.getElementsByTagName("input");
+               for (var i = 0; i < inputs.length; i++)
+                {
+                  if (inputs[i].type == "checkbox")
+                  {
+                      if (inputs[i].checked)
+                      {
+                          var checkBoxId = inputs[i].id;
+                          var checkid = checkBoxId.replace('checkid', '');
+                          str+=checkid+",";
+                          sessionStorage.setItem('pids',str);
+                          var arr=checkArr.push(checkid);
+                       
+                        }
+                    }
+                   
+                  }
+                 // alert("PIDS :"+str);
+                  
+                  str = str.replace(/,\s*$/, "");
+                  
+                  window.location="slide14.html";
+    			}
+    		
+    	});
+           
+
+        
+        function clickonimage(SP_details)
+        {
+                  //alert(SP_details);
+               sessionStorage.setItem('details', SP_details);
+               window.location = "slide5unlogged.html";                
+        }
+                
+        function map()
+        {	
+              window.location = "map.html";
+        }
+                 
+        function slide5_2()
+               
+        {
+        		var inputs = document.getElementsByTagName("input");
+            var checkArr = new Array();
+            var str = new String();
+            var oid = localStorage.getItem('oid');
+            var wecanfixtext=sessionStorage.getItem('wecanfixtext');
+		        var image_paths=sessionStorage.getItem('image_paths');
+		        var help=sessionStorage.getItem('help');
+		        var userlocation=sessionStorage.getItem('userlocation');
+                for (var i = 0; i < inputs.length; i++)
+                {
+                	if (inputs[i].type == "checkbox")
+                	{
+                     	if (inputs[i].checked)
+                     	{
+	                        var checkBoxId = inputs[i].id;
+	                        var checkid = checkBoxId.replace('checkid', '');
+	                        str+=checkid+",";
+	                        var arr=checkArr.push(checkid);
+                       
+                      	}
+                    }
+                   
+                  }
+                  
+                  str = str.replace(/,\s*$/, "");
+                  //alert("string length is : "+ str.length);
+                  sessionStorage.setItem('string',str.length);
+                  var jid=sessionStorage.getItem('jid');
+                  //alert("jid is : "+ jid);
+                  $.ajax({
+                      type: "POST",
+                      url:"http://in.shikshainfotech.com/FixIT/postajob.php?",
+                      data:'oid='+oid+'&issue='+wecanfixtext+'&photo='+image_paths+'&howfast='+help+'&location='+userlocation+'&pick=own&pids='+str,
+                      success: function (data) 
+                      {
+                    	  var jsdata_str=JSON.stringify(data);
+                          var jsdata_obj=JSON.parse(jsdata_str);
+                         // alert(jsdata_obj);
+                          var jid=jsdata_obj.jid;
+                         // alert("jid:" +jid);
+                    	sessionStorage.setItem('jid',jid);
+	                  	window.location = "slide14.html";
+                  	  } 
+                  });  
+        } 
+        
+      /*  $("#settings_button").click( function()
+                {
+               	sessionStorage.setItem("slide","slide13b");
+                window.location="slide28.html";
+                }
+             );
+       */
+    
+       
+    </script>
+
+
+</body>
+</html>
